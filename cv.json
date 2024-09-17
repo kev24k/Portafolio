@@ -1,0 +1,282 @@
+{
+  "basics": {
+    "name": "Kevin Jimenez",
+    "label": "Junior Full Stack Developer",
+    "image": "/me_perfil.jpg",
+    "email": "kevinjimenezm24@gmail.com",
+    "phone": "+51 940 898 689",
+    "url": "https://InkaCode.com",
+    "summary": "Soy Egresado de la Carrera de Desarrollo de Sistemas de Información donde la perseverancia ha moldeado mi trayectoria profesional. A lo largo de estos años, he adquirido una sólida base de conocimientos teóricos y prácticos, desarrollando habilidades en la programación, gestión de bases de datos, análisis de sistemas, redes, ensamblajes de pc y conocimiento en tecnología.",
+    "theme": "default",
+    "location": {
+      "address": "",
+      "postalCode": "08001",
+      "city": "Cusco",
+      "countryCode": "PE",
+      "region": "Perú"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "john-doe",
+        "url": "https://www.linkedin.com/in/kev-jimenez/"
+      },
+      {
+        "network": "X",
+        "username": "john-doe",
+        "url": ""
+      },
+      {
+        "network": "GitHub",
+        "username": "johndoe",
+        "url": "https://github.com/kev24k"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "InkaCode",
+      "position": "Free Lancer Web Developer",
+      "location_type": "Presencial",
+      "location": "Cusco, Perú",
+      "url": "https://Inkacode.com",
+      "startDate": "2024-01-01",
+      "endDate": null,
+      "summary": "Desarrolle e hice Mantenimiento en la pagina usando Astro y Js",
+      "highlights": [
+        "Rendimiento mejorado del sitio web optimizando el código"
+      ],
+      "responsibilities": [
+        "Mejorar e Integrar componentes para la Pagina Web.",
+        "Optimizar el FrontEnd para mejor trabajo de la Pagina Web."
+      ],
+      "achievements": [
+        "Desarrollo y mantenimiento de la aplicacion web utilizando JavaScript, HTML y CSS. Colaborar con el equipo para implementar nuevas funciones y corregir errores."
+      ],
+      "skills": [
+        "Astro",
+        "Tailwind",
+        "HTML"
+      ]
+    },
+    {
+      "name": "AYD MANUFACTURAS",
+      "position": "Software Developer",
+      "location_type": "Presencial",
+      "location": "Cusco, Perú",
+      "url": "https://aydmanufacturas.com/",
+      "startDate": "2023-03-31",
+      "endDate": "2023-11-31",
+      "summary": "Asisti en el desarrollo e implementacion del E-Commerce para la empresa.",
+      "highlights": [
+        "Mejoramiento de la Pagina e Implementacion de Productos a su Pagina Web"
+      ],
+      "responsibilities": [
+        "Desarrollo y mantenimiento de páginas web con implementación de productos y servicios personalizados.",
+        "Apoyo en Diseño Grafico para Banners y Capacitaciones de la Empresa"
+      ],
+      "achievements": [
+        "Logré desarrollar y mantener páginas web con integración personalizada de productos, mejorando la funcionalidad y la experiencia del usuario."
+      ],
+      "skills": [
+        "Wordpress",
+        "HTML",
+        "Figma"
+      ]
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "Local Coding Club",
+      "position": "Volunteer",
+      "url": "https://codingclub.com/",
+      "startDate": "2021-01-01",
+      "endDate": "2022-01-01",
+      "summary": "Helped organize coding workshops and mentored new members.",
+      "highlights": [
+        "Awarded 'Volunteer of the Month'"
+      ]
+    }
+  ],
+  "education": [
+    
+    {
+      "institution": "Instituto Khipu",
+      "area": "Desarrollo de Sistemas e Informacion ",
+      "studyType": "Master",
+      "startDate": "2021-09-01",
+      "endDate": "2024-02-01",
+      "courses": [
+        "SE201 - Advanced Software Development",
+        "SE202 - Software Architecture and Design"
+      ]
+    },
+    {
+      "institution": "Santiago Apostol",
+      "area": "Secundaria Completa",
+      "studyType": "Associate Degree",
+      "startDate": "2015",
+      "endDate": "2020"
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Egresado de la Carrera de Desarrolo de Sistemas e Informacion",
+      "date": "2023-05-01",
+      "issuer": "I.E.S.P KHIPU",
+      "url": "https://onlineuniversity.com/certificates/fullstack"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Figma",
+      "level": "Expert",
+      "keywords": [
+        "Design",
+        "UI"
+      ]
+    },
+    
+    {
+      "name": "HTML",
+      "level": "Intermediate",
+      "keywords": [
+        "Web Development",
+        "Frontend"
+      ]
+    },
+    {
+      "name": "CSS",
+      "level": "Intermediate",
+      "keywords": [
+        "Web Development",
+        "Frontend",
+        "Responsive Design"
+      ]
+    },
+    {
+      "name": "JavaScript",
+      "level": "Intermediate",
+      "keywords": [
+        "Web Development",
+        "Frontend",
+        "Backend",
+        "Fullstack"
+      ]
+    },
+    {
+      "name": "Tailwind",
+      "level": "Intermediate",
+      "keywords": [
+        "Web Development",
+        "Frontend",
+        "CSS Framework",
+        "Responsive Design"
+      ]
+    },
+    {
+      "name": "TypeScript",
+      "level": "Intermediate",
+      "keywords": [
+        "Web Development",
+        "Frontend",
+        "Backend",
+        "JavaScript Superset"
+      ]
+    },
+    {
+      "name": "MySQL",
+      "level": "Intermediate",
+      "keywords": [
+        "Databases",
+        "SQL",
+        "Data Storage",
+        "Backend"
+      ]
+    },
+    {
+      "name": "Git",
+      "level": "Intermediate",
+      "keywords": [
+        "Version Control",
+        "Collaboration",
+        "Source Code"
+      ]
+    },
+    {
+      "name": "GitHub",
+      "level": "Intermediate",
+      "keywords": [
+        "Version Control",
+        "Collaboration",
+        "Source Code",
+        "Git"
+      ]
+    },
+    
+    {
+      "name": "Wordpress",
+      "level": "Intermediate",
+      "keywords": [
+        "Plugins",
+        "Frontend"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Basico"
+    }
+  ],
+  "references": [
+    {
+      "name": "",
+      "reference": ""
+    }
+  ],
+  "projects": [
+    {
+      "name": "Portafolio Personal",
+      "isActive": false,
+      "description": "Un portafolio personal con mis Skills y Gratis Descargable",
+      "highlights": [
+        "Construido en Astro y Taildwind CSS",
+        "Github"
+      ],
+      "url": ""
+      
+    },
+    {
+      "name": "Pagina Web InkaCode",
+      "isActive": true,
+      "description": "Es una pagina Web donde Ofrezco mis servicios Free Lancer y tambien donde Publicito Mi Sistema de Facturacion Electronica",
+      "highlights": [
+        "Construido en Astro",
+        "Responsive design"
+      ],
+      "url": "https://Inkacode.com"
+    },
+    {
+      "name": "Agencia Turistica",
+      "isActive": true,
+      "description": "Aun agencia turistica Creada Para poder Ofrecer servicios de Trekking a Extranjeros o Peruanos",
+      "highlights": [
+        "Construido con Wordpress",
+        "Integracion de Algunos Plugins"
+      ],
+      "url": "https://machupicchureps.org"
+      
+    },
+    {
+      "name": "Sistema de facturacion Electronica",
+      "isActive": true,
+      "description": "Sistema de Facturacion Electronica Verificado por Sunat ISO 27001",
+      "highlights": [
+        "Hecho para emprendedores para que puedan emitir comprobantes electronicos con facilidad",
+        "Responsive design"
+      ],
+      "url": "https://inkacode.com/facturacionv7/login"
+    }
+  ]
+}
