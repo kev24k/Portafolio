@@ -121,7 +121,7 @@ const profilesInfo = profiles.map(({ network, url }) => {
 	const footerButtons = document.querySelectorAll(".footer-button");
 	footerButtons.forEach((button) => {
 		button.addEventListener("click", () => {
-			var event = new KeyboardEvent("keydown", {
+			const event = new KeyboardEvent("keydown", {
 				key: "K",
 				code: "KeyK",
 				keyCode: 75,
