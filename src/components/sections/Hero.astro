@@ -92,15 +92,23 @@ const printInfo = [email, phone, linkedUrl].filter(Boolean).join(" • ");
 				}
 			</footer>
 		</div>
-		<figure class="print:hidden relative shrink-0">
-			<img class="shadow-xl shadow-skin-hues w-32 h-32 md:w-40 md:h-40 rounded-2xl object-cover ring-1 ring-skin-hue/10" src={image} alt={name} />
-			<div class="pointer-events-none absolute -inset-2">
-				<div class="absolute -inset-y-8 right-0 w-px bg-skin-hue/20 [mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
-				<div class="absolute -inset-y-8 left-0 w-px bg-skin-hue/20 [mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
-				<div class="absolute -inset-x-8 bottom-0 h-px bg-skin-hue/20 [mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
-				<div class="absolute -inset-x-8 top-0 h-px bg-skin-hue/20 [mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
-			</div>
-		</figure>
+		<figure class="print:hidden relative shrink-0 mx-auto md:mx-0">
+  <img 
+    class="shadow-xl shadow-skin-hues w-32 h-32 md:w-40 md:h-40 rounded-2xl object-cover ring-1 ring-skin-hue/20" 
+    src={image} 
+    alt={name} 
+  />
+
+  <div class="pointer-events-none absolute -inset-1 md:-inset-2">
+    <div class="absolute -inset-y-4 md:-inset-y-8 right-0 w-px bg-skin-hue/20 [mask-image:linear-gradient(to_top,transparent,white_2rem,white_calc(100%-2rem),transparent)] md:[mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+    
+    <div class="absolute -inset-y-4 md:-inset-y-8 left-0 w-px bg-skin-hue/20 [mask-image:linear-gradient(to_top,transparent,white_2rem,white_calc(100%-2rem),transparent)] md:[mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+    
+    <div class="absolute -inset-x-4 md:-inset-x-8 bottom-0 h-px bg-skin-hue/20 [mask-image:linear-gradient(to_left,transparent,white_2rem,white_calc(100%-2rem),transparent)] md:[mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+    
+    <div class="absolute -inset-x-4 md:-inset-x-8 top-0 h-px bg-skin-hue/20 [mask-image:linear-gradient(to_left,transparent,white_2rem,white_calc(100%-2rem),transparent)] md:[mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+  </div>
+</figure>
 	</div>
 </Section>
 
