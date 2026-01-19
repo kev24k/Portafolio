@@ -3,19 +3,27 @@ import { basics } from "@cv";
 import Section from "@/components/Section.astro";
 import Mail from "@/icons/Mail.astro";
 import Phone from "@/icons/Phone.astro";
-import X from "@/icons/X.astro";
 import LinkedIn from "@/icons/LinkedIn.astro";
 import GitHub from "@/icons/GitHub.astro";
 import WorldMap from "@/icons/WorldMap.astro";
-import type { SocialIcon } from "@/types";
+import type { SocialIcon, Component } from "@/types";
+
+/**
+ * Componente Hero
+ * 
+ * Muestra la información principal del usuario: nombre, título, ubicación,
+ * imagen de perfil y enlaces a redes sociales y contacto.
+ * Es la primera sección visible del portafolio.
+ */
 
 const { name, label, image, location, profiles, phone, email } = basics;
 const { city, region } = location;
 
-const SOCIAL_ICONS: SocialIcon = {
+// Mapeo de iconos de redes sociales disponibles
+const SOCIAL_ICONS: Record<string, Component> = {
 	GitHub,
 	LinkedIn,
-	X,
+	
 };
 
 const linkedInfo = profiles.find(({ network }) => network === "LinkedIn");
@@ -25,30 +33,35 @@ const printInfo = [email, phone, linkedUrl].filter(Boolean).join(" • ");
 ---
 
 <Section>
-	<div class="flex flex-col-reverse gap-8">
-		<div class="info">
-			<h1>{name}</h1>
-			<h2>{label}</h2>
-			<div class="flex items-center gap-2 pt-2 text-sm text-skin-muted">
+	<div class="flex flex-col-reverse gap-8 md:flex-row md:items-center">
+		
+		<div class="info flex-1">
+			<h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl mb-2">{name}</h1>
+			<h2 class="text-lg text-skin-muted mb-4 text-balance">{label}</h2>
+			<div class="flex items-center gap-2 text-sm text-skin-muted mb-6 print:hidden">
 				<WorldMap />
 				{city}, {region}
 			</div>
-			<footer class="print">
-				{printInfo}
+			<footer class="print text-sm text-black font-medium mt-2">
+				<div class="flex flex-col gap-1">
+					{email && <span>{email}</span>}
+					{phone && <span>{phone}</span>}
+					{linkedUrl && <span>{linkedUrl.replace('https://', '')}</span>}
+					<span class="text-xs text-skin-muted mt-1">{city}, {region}</span>
+				</div>
 			</footer>
-			<footer class="no-print">
+			<footer class="no-print flex gap-2">
 				{
 					email && (
-						<div x-data=`{ copyText: '${email}', copyNotification: false, copyToClipboard() { navigator.clipboard.writeText(this.copyText); this.copyNotification = true; let that = this; setTimeout(function(){ that.copyNotification = false; }, 3000); } }` class="relative flex items-center">
-							<div x-show="copyNotification" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-3" x-transition:enter-end="opacity-100 translate-x-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-x-0" x-transition:leave-end="opacity-0 translate-y-2" style="display:none;" class="absolute left-0" x-cloak>
-								<div class="-mt-1.5 flex h-7 -translate-y-full items-center rounded border-r border-green-500 bg-green-500 px-3 text-xs text-white">
-									<span class="!text-white">Copied!</span>
-									<div class="absolute left-0 bottom-0 inline-block h-full translate-x-full translate-y-5 overflow-hidden">
-										<div class="h-3 w-3 origin-center rotate-45 transform border border-transparent bg-green-500" />
-									</div>
+						<div x-data=`{ copyText: '${email}', copyNotification: false, copyToClipboard() { navigator.clipboard.writeText(this.copyText); this.copyNotification = true; let that = this; setTimeout(function(){ that.copyNotification = false; }, 3000); } }` class="relative">
+							<div x-show="copyNotification" 
+							x-transition:enter="transition ease-out duration-300" 
+							x-transition:enter-start="opacity-0 translate-y-3" x-transition:enter-end="opacity-100 translate-x-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-x-0" x-transition:leave-end="opacity-0 translate-y-2" style="display:none;" class="absolute left-0 -top-10" x-cloak>
+								<div class="flex items-center rounded bg-green-500 px-2 py-1 text-xs text-white shadow-sm">
+									<span>Copied!</span>
 								</div>
 							</div>
-							<button @click="copyToClipboard();" class="group flex h-8 w-9 cursor-pointer items-center justify-center rounded-md text-skin-muted hover:bg-skin-button-accent hover:text-skin-inverted [&>span]:hover:text-skin-inverted">
+							<button @click="copyToClipboard();" class="group flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-skin-hue/20 bg-skin-button-accent/10 text-skin-muted transition-all hover:bg-skin-button-accent hover:text-skin-inverted" aria-label="Copiar email">
 								<svg x-show="copyNotification" class="h-4 w-4 stroke-current text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" x-cloak>
 									<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
 								</svg>
@@ -61,7 +74,7 @@ const printInfo = [email, phone, linkedUrl].filter(Boolean).join(" • ");
 				}
 				{
 					phone && (
-						<a href={`tel:${phone}`} title={`Call ${name} at ${phone}`} target="_blank" rel="noopener noreferrer">
+						<a href={`tel:${phone}`} title={`Call ${name} at ${phone}`} target="_blank" rel="noopener noreferrer" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-skin-hue/20 bg-skin-button-accent/10 text-skin-muted transition-all hover:bg-skin-button-accent hover:text-skin-inverted">
 							<Phone />
 						</a>
 					)
@@ -71,27 +84,21 @@ const printInfo = [email, phone, linkedUrl].filter(Boolean).join(" • ");
 						const Icon = SOCIAL_ICONS[network];
 
 						return (
-							<a href={url} title={`Visit ${name} profile on ${network}`} target="_blank" rel="noopener noreferrer">
+							<a href={url} title={`Visit ${name} profile on ${network}`} target="_blank" rel="noopener noreferrer" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-skin-hue/20 bg-skin-button-accent/10 text-skin-muted transition-all hover:bg-skin-button-accent hover:text-skin-inverted">
 								<Icon />
 							</a>
 						);
 					})
 				}
-				<div class="no-print footer-button max-sm:hidden group flex h-8 w-9 cursor-pointer items-center justify-center rounded-md text-skin-hue hover:bg-skin-button-accent hover:text-skin-inverted [&>span]:hover:text-skin-inverted">
-					<svg xmlns="http://www.w3.org/2000/svg" class="icon h-6 w-6 icon-tabler icon-tabler-command"  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-						<path d="M7 9a2 2 0 1 1 2 -2v10a2 2 0 1 1 -2 -2h10a2 2 0 1 1 -2 2v-10a2 2 0 1 1 2 2h-10"></path>
-					</svg>
-				</div>
 			</footer>
 		</div>
-		<figure class="print:hidden w-fit relative">
-			<img class="shadow-lg shadow-skin-hues" src={image} alt={name} />
+		<figure class="print:hidden relative shrink-0">
+			<img class="shadow-xl shadow-skin-hues w-32 h-32 md:w-40 md:h-40 rounded-2xl object-cover ring-1 ring-skin-hue/10" src={image} alt={name} />
 			<div class="pointer-events-none absolute -inset-2">
-				<div class="absolute -inset-y-8 right-0 w-px bg-skin-hue/50 [mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
-				<div class="absolute -inset-y-8 left-0 w-px bg-skin-hue/50 [mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
-				<div class="absolute -inset-x-8 bottom-0 h-px bg-skin-hue/50 [mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
-				<div class="absolute -inset-x-8 top-0 h-px bg-skin-hue/50 [mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+				<div class="absolute -inset-y-8 right-0 w-px bg-skin-hue/20 [mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+				<div class="absolute -inset-y-8 left-0 w-px bg-skin-hue/20 [mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+				<div class="absolute -inset-x-8 bottom-0 h-px bg-skin-hue/20 [mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+				<div class="absolute -inset-x-8 top-0 h-px bg-skin-hue/20 [mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
 			</div>
 		</figure>
 	</div>
