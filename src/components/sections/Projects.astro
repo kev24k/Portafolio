@@ -6,7 +6,9 @@ import { projects } from "@cv";
 <Section className={Astro.props.className} title="Proyectos">
 	<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 print:hidden">
 		{
-			projects.map(({ url, description, highlights, name, isActive, image }) => {
+			projects.map(({ url, description, highlights, name, isActive, image, images }) => {
+				const imagesToDisplay = images && images.length > 0 ? images : (image ? [image] : []);
+
 				return (
 					<a 
 						href={url || "#"} 
@@ -16,15 +18,31 @@ import { projects } from "@cv";
 						class="group flex flex-col gap-3"
 					>
 						<div class="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-skin-hue/10 bg-skin-button-muted shadow-sm transition-all duration-500 ease-out group-hover:scale-[1.02] group-hover:shadow-xl group-hover:shadow-skin-hue/20">
-							{image && (
+							{imagesToDisplay.length === 1 && (
 								<img 
-									src={image} 
+									src={imagesToDisplay[0]} 
 									alt={`Captura de pantalla del proyecto ${name}`} 
 									class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
 									loading="lazy"
 								/>
 							)}
-							<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+							{imagesToDisplay.length > 1 && (
+								<div class="project-image-stack relative w-full h-full cursor-pointer group/stack">
+									<img 
+										src={imagesToDisplay[0]} 
+										alt={`Captura de pantalla 1 del proyecto ${name}`} 
+										class="absolute bottom-0 left-0 w-[95%] h-[95%] object-cover rounded-xl shadow-lg transition-all duration-500 z-10 active-img"
+										loading="lazy"
+									/>
+									<img 
+										src={imagesToDisplay[1]} 
+										alt={`Captura de pantalla 2 del proyecto ${name}`} 
+										class="absolute top-0 right-0 w-[95%] h-[95%] object-cover rounded-xl shadow-lg transition-all duration-500 z-0 opacity-60 scale-95 inactive-img"
+										loading="lazy"
+									/>
+								</div>
+							)}
+							<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"></div>
 						</div>
 
 						<div class="flex flex-col gap-2 px-1">
@@ -60,3 +78,49 @@ import { projects } from "@cv";
 		}
 	</div>
 </Section>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const stacks = document.querySelectorAll('.project-image-stack');
+
+		stacks.forEach(stack => {
+			stack.addEventListener('click', (e) => {
+				e.preventDefault(); // Prevent link navigation
+				e.stopPropagation(); // Stop event bubbling
+				
+				const imgs = stack.querySelectorAll('img');
+				if (imgs.length < 2) return;
+
+				const img1 = imgs[0];
+				const img2 = imgs[1];
+
+				// Check current state
+				const isImg1Active = img1.classList.contains('z-10');
+
+				if (isImg1Active) {
+					// Swap: Img 1 goes to back, Img 2 comes to front
+					img1.classList.replace('z-10', 'z-0');
+					img1.classList.replace('bottom-0', 'top-0');
+					img1.classList.replace('left-0', 'right-0');
+					img1.classList.add('opacity-60', 'scale-95');
+
+					img2.classList.replace('z-0', 'z-10');
+					img2.classList.replace('top-0', 'bottom-0');
+					img2.classList.replace('right-0', 'left-0');
+					img2.classList.remove('opacity-60', 'scale-95');
+				} else {
+					// Reset: Img 1 comes to front, Img 2 goes to back
+					img1.classList.replace('z-0', 'z-10');
+					img1.classList.replace('top-0', 'bottom-0');
+					img1.classList.replace('right-0', 'left-0');
+					img1.classList.remove('opacity-60', 'scale-95');
+
+					img2.classList.replace('z-10', 'z-0');
+					img2.classList.replace('bottom-0', 'top-0');
+					img2.classList.replace('left-0', 'right-0');
+					img2.classList.add('opacity-60', 'scale-95');
+				}
+			});
+		});
+	});
+</script>

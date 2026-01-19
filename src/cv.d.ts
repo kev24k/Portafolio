@@ -130,6 +130,8 @@ interface Projects {
   highlights: Highlight;
   url: string;
   github?: string;
+  image?: string;
+  images?: string[];
 }
 
 interface Interests {

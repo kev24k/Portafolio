@@ -327,18 +327,7 @@
         "Optimización de rendimiento y accesibilidad"
       ],
       "url": "https://menu.greenpointcusco.com/",
-      "image": "https://placehold.co/600x400/1a1a1a/white?text=Menu+Green+Point"
-    },
-    {
-      "name": "Portafolio Personal",
-      "isActive": false,
-      "description": "Un portafolio personal con mis Skills y Gratis Descargable",
-      "highlights": [
-        "Construido en Astro y Taildwind CSS",
-        "Github"
-      ],
-      "url": "",
-      "image": "https://placehold.co/600x400/1a1a1a/white?text=Portafolio"
+      "image": "/carta-gp-desktop.png"
     },
     {
       "name": "Pagina Web InkaCode",
@@ -349,18 +338,20 @@
         "Responsive design"
       ],
       "url": "https://Inkacode.com",
-      "image": "https://placehold.co/600x400/1a1a1a/white?text=InkaCode"
+      "images": [
+        "/inkacode.com.png", 
+        "/inkacode-mobile.png"]
     },
     {
-      "name": "Agencia Turistica",
+      "name": "Machupicchu Reps",
       "isActive": true,
       "description": "Aun agencia turistica Creada Para poder Ofrecer servicios de Trekking a Extranjeros o Peruanos",
       "highlights": [
         "Construido con Astro, React y Tailwind CSS",
         "Responsive design"
       ],
-      "url": "https://machupicchureps.org",
-      "image": "https://placehold.co/600x400/1a1a1a/white?text=Machupicchu+Reps"
+      "url": "/",
+      "image": "/machupicchu-reps.png"
     },
     {
       "name": "Sistema de facturacion Electronica",
@@ -371,7 +362,40 @@
         "Responsive design"
       ],
       "url": "https://inkacode.com/facturacionv9/login",
-      "image": "https://placehold.co/600x400/1a1a1a/white?text=Facturacion+Electronica"
+      "image": "/inkacode-facturacion-web.png"
+    },
+    {
+      "name": "Tierra Fértil",
+      "isActive": true,
+      "description": "Pagina web centralizadora de redes sociales para la inmobiliaria Tierra Fértil.",
+      "highlights": [
+        "Landing Page",
+        "Responsive Design"
+      ],
+      "url": "https://tierrafertil.pe",
+      "image": "/tierrafertil.pe.png"
+    },
+    {
+      "name": "FinanziApp - Gestión de Gastos",
+      "isActive": true,
+      "description": "Web App para el control de ingresos y egresos empresariales.",
+      "highlights": [
+        "Gestión Financiera",
+        "Dashboard"
+      ],
+      "url": "/",
+      "image": "/finanzas.png"
+    },
+    {
+      "name": "Chevere Cargo",
+      "isActive": true,
+      "description": "Plataforma de conexión entre embarcadores y transportistas de carga pesada.",
+      "highlights": [
+        "Marketplace Logístico",
+        "Web App"
+      ],
+      "url": "/",
+      "images": ["/chevere-cargo-mock-desktop.png", "/chevere-cargo-mock-mobile.png"]
     }
   ]
 }
