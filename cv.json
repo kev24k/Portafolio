@@ -1,12 +1,12 @@
 {
   "basics": {
     "name": "Kevin Jimenez",
-    "label": "Junior Full Stack Developer",
+    "label": "Junior-Mid Full Stack Developer",
     "image": "/me_perfil.jpg",
     "email": "kevinjimenezm24@gmail.com",
     "phone": "+51 940 898 689",
     "url": "https://InkaCode.com",
-    "summary": "Soy Egresado de la Carrera de Desarrollo de Sistemas de Información donde la perseverancia ha moldeado mi trayectoria profesional. A lo largo de estos años, he adquirido una sólida base de conocimientos teóricos y prácticos, desarrollando habilidades en la programación, gestión de bases de datos, análisis de sistemas, redes, ensamblajes de pc y conocimiento en tecnología.",
+    "summary": "Soy Titulado Profesional en Desarrollo de Sistemas de Información y actualmente continúo mi formación académica en la Universidad Continental. Mi trayectoria se define por la perseverancia y una sólida base en programación, gestión de bases de datos y soporte TI. Me apasiona crear soluciones tecnológicas eficientes, combinando mis conocimientos teóricos con la experiencia práctica en desarrollo web y soporte técnico.",
     "theme": "default",
     "location": {
       "address": "",
@@ -18,22 +18,46 @@
     "profiles": [
       {
         "network": "LinkedIn",
-        "username": "john-doe",
+        "username": "Kev Jimenez",
         "url": "https://www.linkedin.com/in/kev-jimenez/"
       },
       {
-        "network": "X",
-        "username": "john-doe",
-        "url": ""
-      },
-      {
         "network": "GitHub",
-        "username": "johndoe",
+        "username": "kev24k",
         "url": "https://github.com/kev24k"
       }
     ]
   },
   "work": [
+    {
+      "name": "Green Point Restaurant",
+      "position": "SOPORTE TI y Desarrollador Web",
+      "location_type": "Presencial",
+      "location": "Cusco, Perú",
+      "url": "https://menu.greenpointcusco.com/",
+      "startDate": "2025-06-12",
+      "endDate": null,
+      "summary": "Encargado del soporte técnico integral y del desarrollo/mantenimiento de la plataforma web del menú digital.",
+      "highlights": [
+        "Desarrollo y mantenimiento del menú digital interactivo",
+        "Soporte técnico de infraestructura TI en el restaurante"
+      ],
+      "responsibilities": [
+        "Mantener y actualizar el sistema de menú digital para los comensales.",
+        "Asegurar la estabilidad de la red y equipos informáticos del establecimiento."
+      ],
+      "achievements": [
+        "Optimización del tiempo de carga del menú digital y mejora de la interfaz de usuario para pedidos."
+      ],
+      "skills": [
+        "JavaScript",
+        "HTML",
+        "Soporte TI",
+        "Astro",
+        "Tailwind",
+        "Postgres"
+      ]
+    },
     {
       "name": "InkaCode",
       "position": "Free Lancer Web Developer",
@@ -99,7 +123,14 @@
     }
   ],
   "education": [
-    
+    {
+      "institution": "Universidad Continental",
+      "area": "Ingeniería de Sistemas e Informática",
+      "studyType": "Bachelor",
+      "startDate": "2024-03-01",
+      "endDate": "Presente",
+      "courses": []
+    },
     {
       "institution": "Instituto Khipu",
       "area": "Desarrollo de Sistemas e Informacion ",
@@ -121,7 +152,13 @@
   ],
   "certificates": [
     {
-      "name": "Egresado de la Carrera de Desarrolo de Sistemas e Informacion",
+      "name": "Título Profesional en Desarrollo de Sistemas e Información",
+      "date": "2024-05-15",
+      "issuer": "I.E.S.P KHIPU",
+      "url": "https://onlineuniversity.com/certificates/fullstack"
+    },
+    {
+      "name": "Egresado de la Carrera de Desarrollo de Sistemas e Información",
       "date": "2023-05-01",
       "issuer": "I.E.S.P KHIPU",
       "url": "https://onlineuniversity.com/certificates/fullstack"
@@ -221,6 +258,51 @@
         "Plugins",
         "Frontend"
       ]
+    },
+    {
+      "name": "Soporte TI",
+      "level": "Intermediate",
+      "keywords": [
+        "Hardware",
+        "Software",
+        "Redes"
+      ]
+    },
+    {
+      "name": "React",
+      "level": "Intermediate",
+      "keywords": [
+        "Frontend",
+        "JavaScript Library",
+        "UI"
+      ]
+    },
+    {
+      "name": "Next.js",
+      "level": "Intermediate",
+      "keywords": [
+        "Frontend",
+        "Framework",
+        "SSR"
+      ]
+    },
+    {
+      "name": "Postgres",
+      "level": "Intermediate",
+      "keywords": [
+        "Databases",
+        "SQL",
+        "Backend"
+      ]
+    },
+    {
+      "name": "Supabase",
+      "level": "Intermediate",
+      "keywords": [
+        "Backend as a Service",
+        "Databases",
+        "Authentication"
+      ]
     }
   ],
   "languages": [
@@ -237,6 +319,17 @@
   ],
   "projects": [
     {
+      "name": "Menú Digital Green Point",
+      "isActive": true,
+      "description": "Plataforma de menú interactivo para el restaurante Green Point en Cusco.",
+      "highlights": [
+        "Interfaz interactiva para comensales",
+        "Optimización de rendimiento y accesibilidad"
+      ],
+      "url": "https://menu.greenpointcusco.com/",
+      "image": "https://placehold.co/600x400/1a1a1a/white?text=Menu+Green+Point"
+    },
+    {
       "name": "Portafolio Personal",
       "isActive": false,
       "description": "Un portafolio personal con mis Skills y Gratis Descargable",
@@ -244,8 +337,8 @@
         "Construido en Astro y Taildwind CSS",
         "Github"
       ],
-      "url": ""
-      
+      "url": "",
+      "image": "https://placehold.co/600x400/1a1a1a/white?text=Portafolio"
     },
     {
       "name": "Pagina Web InkaCode",
@@ -255,18 +348,19 @@
         "Construido en Astro",
         "Responsive design"
       ],
-      "url": "https://Inkacode.com"
+      "url": "https://Inkacode.com",
+      "image": "https://placehold.co/600x400/1a1a1a/white?text=InkaCode"
     },
     {
       "name": "Agencia Turistica",
       "isActive": true,
       "description": "Aun agencia turistica Creada Para poder Ofrecer servicios de Trekking a Extranjeros o Peruanos",
       "highlights": [
-        "Construido con Wordpress",
-        "Integracion de Algunos Plugins"
+        "Construido con Astro, React y Tailwind CSS",
+        "Responsive design"
       ],
-      "url": "https://machupicchureps.org"
-      
+      "url": "https://machupicchureps.org",
+      "image": "https://placehold.co/600x400/1a1a1a/white?text=Machupicchu+Reps"
     },
     {
       "name": "Sistema de facturacion Electronica",
@@ -276,7 +370,8 @@
         "Hecho para emprendedores para que puedan emitir comprobantes electronicos con facilidad",
         "Responsive design"
       ],
-      "url": "https://inkacode.com/facturacionv7/login"
+      "url": "https://inkacode.com/facturacionv9/login",
+      "image": "https://placehold.co/600x400/1a1a1a/white?text=Facturacion+Electronica"
     }
   ]
 }
