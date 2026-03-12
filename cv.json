@@ -2,7 +2,7 @@
   "basics": {
     "name": "Kevin Jimenez",
     "label": "Junior-Mid Full Stack Developer",
-    "image": "/image.png",
+    "image": "/image.webp",
     "email": "kevinjimenezm24@gmail.com",
     "phone": "+51 940 898 689",
     "url": "https://InkaCode.com",
@@ -77,11 +77,7 @@
       "achievements": [
         "Desarrollo y mantenimiento de la aplicacion web utilizando JavaScript, HTML y CSS. Colaborar con el equipo para implementar nuevas funciones y corregir errores."
       ],
-      "skills": [
-        "Astro",
-        "Tailwind",
-        "HTML"
-      ]
+      "skills": ["Astro", "Tailwind", "HTML"]
     },
     {
       "name": "AYD MANUFACTURAS",
@@ -102,11 +98,7 @@
       "achievements": [
         "Logré desarrollar y mantener páginas web con integración personalizada de productos, mejorando la funcionalidad y la experiencia del usuario."
       ],
-      "skills": [
-        "Wordpress",
-        "HTML",
-        "Figma"
-      ]
+      "skills": ["Wordpress", "HTML", "Figma"]
     }
   ],
   "volunteer": [
@@ -117,9 +109,7 @@
       "startDate": "2021-01-01",
       "endDate": "2022-01-01",
       "summary": "Helped organize coding workshops and mentored new members.",
-      "highlights": [
-        "Awarded 'Volunteer of the Month'"
-      ]
+      "highlights": ["Awarded 'Volunteer of the Month'"]
     }
   ],
   "education": [
@@ -168,38 +158,23 @@
     {
       "name": "Figma",
       "level": "Expert",
-      "keywords": [
-        "Design",
-        "UI"
-      ]
+      "keywords": ["Design", "UI"]
     },
-    
+
     {
       "name": "HTML",
       "level": "Intermediate",
-      "keywords": [
-        "Web Development",
-        "Frontend"
-      ]
+      "keywords": ["Web Development", "Frontend"]
     },
     {
       "name": "CSS",
       "level": "Intermediate",
-      "keywords": [
-        "Web Development",
-        "Frontend",
-        "Responsive Design"
-      ]
+      "keywords": ["Web Development", "Frontend", "Responsive Design"]
     },
     {
       "name": "JavaScript",
       "level": "Intermediate",
-      "keywords": [
-        "Web Development",
-        "Frontend",
-        "Backend",
-        "Fullstack"
-      ]
+      "keywords": ["Web Development", "Frontend", "Backend", "Fullstack"]
     },
     {
       "name": "Tailwind",
@@ -224,85 +199,48 @@
     {
       "name": "MySQL",
       "level": "Intermediate",
-      "keywords": [
-        "Databases",
-        "SQL",
-        "Data Storage",
-        "Backend"
-      ]
+      "keywords": ["Databases", "SQL", "Data Storage", "Backend"]
     },
     {
       "name": "Git",
       "level": "Intermediate",
-      "keywords": [
-        "Version Control",
-        "Collaboration",
-        "Source Code"
-      ]
+      "keywords": ["Version Control", "Collaboration", "Source Code"]
     },
     {
       "name": "GitHub",
       "level": "Intermediate",
-      "keywords": [
-        "Version Control",
-        "Collaboration",
-        "Source Code",
-        "Git"
-      ]
+      "keywords": ["Version Control", "Collaboration", "Source Code", "Git"]
     },
-    
+
     {
       "name": "Wordpress",
       "level": "Intermediate",
-      "keywords": [
-        "Plugins",
-        "Frontend"
-      ]
+      "keywords": ["Plugins", "Frontend"]
     },
     {
       "name": "Soporte TI",
       "level": "Intermediate",
-      "keywords": [
-        "Hardware",
-        "Software",
-        "Redes"
-      ]
+      "keywords": ["Hardware", "Software", "Redes"]
     },
     {
       "name": "React",
       "level": "Intermediate",
-      "keywords": [
-        "Frontend",
-        "JavaScript Library",
-        "UI"
-      ]
+      "keywords": ["Frontend", "JavaScript Library", "UI"]
     },
     {
       "name": "Next.js",
       "level": "Intermediate",
-      "keywords": [
-        "Frontend",
-        "Framework",
-        "SSR"
-      ]
+      "keywords": ["Frontend", "Framework", "SSR"]
     },
     {
       "name": "Postgres",
       "level": "Intermediate",
-      "keywords": [
-        "Databases",
-        "SQL",
-        "Backend"
-      ]
+      "keywords": ["Databases", "SQL", "Backend"]
     },
     {
       "name": "Supabase",
       "level": "Intermediate",
-      "keywords": [
-        "Backend as a Service",
-        "Databases",
-        "Authentication"
-      ]
+      "keywords": ["Backend as a Service", "Databases", "Authentication"]
     }
   ],
   "languages": [
@@ -327,20 +265,15 @@
         "Optimización de rendimiento y accesibilidad"
       ],
       "url": "https://menu.greenpointcusco.com/",
-      "image": "/carta-gp-desktop.png"
+      "image": "/carta-gp-desktop.webp"
     },
     {
       "name": "Pagina Web InkaCode",
       "isActive": true,
       "description": "Es una pagina Web donde Ofrezco mis servicios Free Lancer y tambien donde Publicito Mi Sistema de Facturacion Electronica",
-      "highlights": [
-        "Construido en Astro",
-        "Responsive design"
-      ],
+      "highlights": ["Construido en Astro", "Responsive design"],
       "url": "https://Inkacode.com",
-      "images": [
-        "/inkacode.com.png", 
-        "/inkacode-mobile.png"]
+      "images": ["/inkacode.com.webp", "/inkacode-mobile.webp"]
     },
     {
       "name": "Machupicchu Reps",
@@ -351,7 +284,7 @@
         "Responsive design"
       ],
       "url": "/",
-      "image": "/machupicchu-reps.png"
+      "image": "/machupicchu-reps.webp"
     },
     {
       "name": "Sistema de facturacion Electronica",
@@ -362,40 +295,34 @@
         "Responsive design"
       ],
       "url": "https://inkacode.com/facturacionv9/login",
-      "image": "/inkacode-facturacion-web.png"
+      "image": "/inkacode-facturacion-web.webp"
     },
     {
       "name": "Tierra Fértil",
       "isActive": true,
       "description": "Pagina web centralizadora de redes sociales para la inmobiliaria Tierra Fértil.",
-      "highlights": [
-        "Landing Page",
-        "Responsive Design"
-      ],
+      "highlights": ["Landing Page", "Responsive Design"],
       "url": "https://tierrafertil.pe",
-      "image": "/tierrafertil.pe.png"
+      "image": "/tierrafertil.pe.webp"
     },
     {
       "name": "FinanziApp - Gestión de Gastos",
       "isActive": true,
       "description": "Web App para el control de ingresos y egresos empresariales.",
-      "highlights": [
-        "Gestión Financiera",
-        "Dashboard"
-      ],
+      "highlights": ["Gestión Financiera", "Dashboard"],
       "url": "/",
-      "image": "/finanzas.png"
+      "image": "/finanzas.webp"
     },
     {
       "name": "Chevere Cargo",
       "isActive": true,
       "description": "Plataforma de conexión entre embarcadores y transportistas de carga pesada.",
-      "highlights": [
-        "Marketplace Logístico",
-        "Web App"
-      ],
+      "highlights": ["Marketplace Logístico", "Web App"],
       "url": "/",
-      "images": ["/chevere-cargo-mock-desktop.png", "/chevere-cargo-mock-mobile.png"]
+      "images": [
+        "/chevere-cargo-mock-desktop.webp",
+        "/chevere-cargo-mock-mobile.webp"
+      ]
     }
   ]
 }
