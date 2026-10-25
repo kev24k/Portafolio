@@ -1,63 +1,19 @@
 ---
 import Section from "../Section.astro";
-import HTML from "@/icons/html.astro";
-import CSS from "@/icons/css.astro";
-import JavaScript from "@/icons/javascript.astro";
-import TypeScript from "@/icons/type.astro";
-import React from "@/icons/react.astro";
-import Node from "@/icons/node.astro";
-import MySQL from "@/icons/sql.astro";
-import Git from "@/icons/git.astro";
-import GitHub from "@/icons/GitHub.astro";
-import Tailwind from "@/icons/tailwind.astro";
-import Next from "@/icons/next.astro";
 import { skills } from "@cv";
-import Swift from "@/icons/swift.astro";
-import SwiftUI from "@/icons/swiftui.astro";
-import Kotlin from "@/icons/kotlin.astro";
-import Flutter from "@/icons/flutter.astro";
-import Figma from "@/icons/Figma.astro";
-import Gitlab from "@/icons/Gitlab.astro";
-import Wordpress from "@/icons/Wordpress.astro";
-import Supabase from "@/icons/Supabase.astro";
-import Postgres from "@/icons/Postgres.astro";
-import type { Component } from "@/types";
-
-
-const SKILLS_ICONS: Record<string, Component> = {
-	HTML,
-	CSS,
-	JavaScript,
-	TypeScript,
-	React,
-	Node,
-	MySQL,
-	Postgres,
-	Git,
-	GitHub,
-	Next,
-	Tailwind,
-	Swift,
-	SwiftUI,
-	Kotlin,
-	Flutter,
-	Figma,
-	Gitlab,
-	Wordpress,
-	Supabase,
-};
+import { getSkillIcon } from "@/icons/skills";
 ---
 
-<Section className={Astro.props.className} title="Skills">
-	<ul class="[&>li>svg]:text-skin-hue inline-flex flex-wrap gap-2 [&>li>svg]:size-4 [&>li]:text-sm">
+<Section id="habilidades" title="Habilidades" className={Astro.props.className}>
+	<ul class="flex flex-wrap gap-2.5">
 		{
-			skills.map(({ name }) => {
-				const iconName = name === "Next.js" ? "Next" : name;
-				const Icon = SKILLS_ICONS[iconName];
+			skills.map(({ name }, i) => {
+				const Icon = getSkillIcon(name);
 
 				return (
-					<li class="group flex items-center gap-2 rounded-full border border-skin-hue/20 bg-skin-button-accent/10 px-4 py-1.5 text-xs font-medium leading-5 text-skin-muted transition-all hover:border-skin-hue/40 hover:bg-skin-button-accent/20 hover:text-skin-base print:border-zinc-300 print:bg-transparent print:text-zinc-800">
-						{Icon && <Icon class="transition-transform group-hover:scale-110" />} <span>{name}</span>
+					<li data-reveal="scale" style={`--d:${i * 35}ms`} class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1.5 text-[15px] transition-colors hover:border-accent/60 [&>svg]:size-4 [&>svg]:text-muted">
+						{Icon && <Icon />}
+						<span>{name}</span>
 					</li>
 				);
 			})

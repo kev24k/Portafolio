@@ -1,0 +1,74 @@
+<script>
+	const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+	// Aparición de elementos al entrar en pantalla
+	const revealables = document.querySelectorAll<HTMLElement>("[data-reveal]");
+	if (reduceMotion || !("IntersectionObserver" in window)) {
+		revealables.forEach((el) => el.classList.add("is-visible"));
+	} else {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (!entry.isIntersecting) return;
+					entry.target.classList.add("is-visible");
+					observer.unobserve(entry.target);
+				});
+			},
+			{ rootMargin: "0px 0px -10% 0px", threshold: 0.12 },
+		);
+		revealables.forEach((el) => observer.observe(el));
+	}
+
+	// Cabecera: borde al hacer scroll y enlace de la sección activa
+	const header = document.querySelector<HTMLElement>("[data-header]");
+	const onScroll = () => header?.toggleAttribute("data-scrolled", window.scrollY > 8);
+	onScroll();
+	window.addEventListener("scroll", onScroll, { passive: true });
+
+	const navLinks = document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]");
+	const sectionObserver = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (!entry.isIntersecting) return;
+				navLinks.forEach((link) => link.toggleAttribute("aria-current", link.hash === `#${entry.target.id}`));
+			});
+		},
+		{ rootMargin: "-45% 0px -50% 0px" },
+	);
+	navLinks.forEach((link) => {
+		const section = document.querySelector(link.hash);
+		if (section) sectionObserver.observe(section);
+	});
+
+	// Halo que sigue al cursor dentro de las tarjetas y del bloque de contacto
+	if (!reduceMotion) {
+		document.querySelectorAll<HTMLElement>("[data-spotlight]").forEach((el) => {
+			el.addEventListener("pointermove", (event) => {
+				const rect = el.getBoundingClientRect();
+				el.style.setProperty("--mx", `${event.clientX - rect.left}px`);
+				el.style.setProperty("--my", `${event.clientY - rect.top}px`);
+			});
+		});
+	}
+</script>
+
+<style is:global>
+	[data-spotlight] {
+		position: relative;
+		isolation: isolate;
+	}
+	[data-spotlight]::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		border-radius: inherit;
+		opacity: 0;
+		transition: opacity 0.4s;
+		background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(var(--accent), 0.14), transparent 70%);
+		pointer-events: none;
+	}
+	[data-spotlight]:hover::before {
+		opacity: 1;
+	}
+</style>

@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # local folders
 .history
+
+# configuración local de Claude Code
+.claude/settings.local.json

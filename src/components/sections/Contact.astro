@@ -1,0 +1,61 @@
+---
+import { basics } from "@cv";
+
+const { name, email, phone, location, profiles } = basics;
+const whatsapp = phone ? `https://wa.me/${phone.replace(/\D/g, "")}` : undefined;
+---
+
+<section id="contacto" class="no-print pt-16 md:pt-24">
+	<div data-reveal="scale" data-spotlight class="contact-panel relative overflow-hidden rounded-[32px] bg-wine px-6 py-16 text-[#F7EAE2] sm:px-12 md:px-16 md:py-24">
+		<div class="glow pointer-events-none absolute -right-32 -top-32 size-[28rem] rounded-full blur-3xl" aria-hidden="true"></div>
+		<h2 class="relative max-w-[18ch] text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-[1.05] tracking-[-0.03em]">
+			¿Tienes un proyecto en mente? Cuéntame qué necesitas.
+		</h2>
+		<p class="relative mt-6 max-w-[56ch] text-[18px] text-[#F7EAE2]/75">
+			Trabajo con negocios de {location.city} y de todo {location.region}, de forma presencial o remota.
+		</p>
+
+		<div class="relative mt-10 flex flex-wrap items-center gap-3">
+			<a href={`mailto:${email}`} class="btn relative overflow-hidden bg-accent text-white transition-transform hover:-translate-y-0.5">Escribir a {email}</a>
+			<button type="button" id="copyEmail" data-email={email} class="btn border border-white/25 text-white hover:border-white" aria-live="polite">Copiar correo</button>
+			{whatsapp && (
+				<a href={whatsapp} target="_blank" rel="noopener noreferrer" class="btn border border-white/25 text-white hover:border-white">WhatsApp</a>
+			)}
+		</div>
+	</div>
+
+	<footer class="mt-12 flex flex-col gap-4 border-t border-line pt-8 text-[14px] text-muted sm:flex-row sm:items-center sm:justify-between">
+		<div class="flex items-center gap-3">
+			<img src="/logokevsinfondo.svg" alt="" class="h-6 w-auto" width="22" height="24" />
+			<span>© {new Date().getFullYear()} {name}. Hecho con Astro.</span>
+		</div>
+		<ul class="flex gap-5">
+			{profiles.map(({ network, url }) => (
+				<li><a href={url} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-ink">{network}</a></li>
+			))}
+		</ul>
+	</footer>
+</section>
+
+<style>
+	/* Brasa que respira detrás del texto */
+	.glow {
+		background: radial-gradient(circle, rgba(var(--accent), 0.55), rgba(var(--amber), 0.15) 45%, transparent 70%);
+		animation: breathe 7s ease-in-out infinite;
+	}
+	@keyframes breathe {
+		50% {
+			transform: translate(-3rem, 2rem) scale(1.15);
+			opacity: 0.75;
+		}
+	}
+</style>
+
+<script>
+	const button = document.getElementById("copyEmail") as HTMLButtonElement | null;
+	button?.addEventListener("click", async () => {
+		await navigator.clipboard.writeText(button.dataset.email ?? "");
+		button.textContent = "Correo copiado";
+		setTimeout(() => (button.textContent = "Copiar correo"), 2500);
+	});
+</script>
