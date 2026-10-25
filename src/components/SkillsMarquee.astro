@@ -1,6 +1,6 @@
 ---
 import { skills } from "@cv";
-import { getSkillIcon } from "@/icons/skills";
+import SkillIcon from "@/components/SkillIcon.astro";
 
 // La lista se duplica para que el desplazamiento sea continuo
 const loop = [...skills, ...skills];
@@ -10,10 +10,9 @@ const loop = [...skills, ...skills];
 	<ul class="flex w-max gap-10 pr-10 group-hover:[animation-play-state:paused]">
 		{
 			loop.map(({ name }, i) => {
-				const Icon = getSkillIcon(name);
 				return (
 					<li class="flex items-center gap-2.5 whitespace-nowrap text-[17px] font-medium text-muted [&>svg]:size-5" aria-hidden={i >= skills.length ? "true" : undefined}>
-						{Icon && <Icon />}
+						<SkillIcon name={name} />
 						{name}
 					</li>
 				);

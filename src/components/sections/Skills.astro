@@ -1,18 +1,16 @@
 ---
 import Section from "../Section.astro";
 import { skills } from "@cv";
-import { getSkillIcon } from "@/icons/skills";
+import SkillIcon from "@/components/SkillIcon.astro";
 ---
 
 <Section id="habilidades" title="Habilidades" className={Astro.props.className}>
 	<ul class="flex flex-wrap gap-2.5">
 		{
 			skills.map(({ name }, i) => {
-				const Icon = getSkillIcon(name);
-
 				return (
-					<li data-reveal="scale" style={`--d:${i * 35}ms`} class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1.5 text-[15px] transition-colors hover:border-accent/60 [&>svg]:size-4 [&>svg]:text-muted">
-						{Icon && <Icon />}
+					<li data-reveal="scale" style={`--d:${i * 35}ms`} class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1.5 text-[15px] transition-colors hover:border-accent/60 [&>svg]:size-4">
+						<SkillIcon name={name} />
 						<span>{name}</span>
 					</li>
 				);

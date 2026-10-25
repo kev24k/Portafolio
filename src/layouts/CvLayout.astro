@@ -1,0 +1,50 @@
+---
+// Página para ver el CV en pantalla; solo se imprime si el usuario lo pide
+import Layout from "@/layouts/Layout.astro";
+import CvPrint from "@/components/CvPrint.astro";
+import { basics } from "@cv";
+
+interface Props {
+	lang: "es" | "en";
+}
+
+const { lang } = Astro.props;
+const t = {
+	es: { title: "CV", back: "Volver al portafolio", hint: "o pulsa Esc", save: "Guardar en PDF" },
+	en: { title: "Resume", back: "Back to portfolio", hint: "or press Esc", save: "Save as PDF" },
+}[lang];
+---
+
+<Layout title={`${basics.name} | ${t.title}`}>
+	<div class="no-print mx-auto flex max-w-[210mm] items-center justify-between gap-4 px-5 py-6">
+		<p class="text-[15px] text-muted">
+			<a href="/" class="transition-colors hover:text-ink">← {t.back}</a>
+			<span class="ml-1 hidden sm:inline">{t.hint}</span>
+		</p>
+		<button type="button" data-print class="btn-primary">{t.save}</button>
+	</div>
+	<div class="sheet mx-auto mb-16 w-fit shadow-2xl shadow-wine/15">
+		<CvPrint lang={lang} onScreen />
+	</div>
+</Layout>
+
+<script>
+	document.querySelector("[data-print]")?.addEventListener("click", () => window.print());
+	document.addEventListener("keydown", (event) => {
+		if (event.key === "Escape") window.location.href = "/";
+	});
+</script>
+
+<style>
+	@media print {
+		.sheet {
+			margin: 0;
+			box-shadow: none;
+		}
+	}
+	@media screen and (max-width: 220mm) {
+		.sheet {
+			zoom: 0.45;
+		}
+	}
+</style>
