@@ -1,0 +1,72 @@
+---
+// Logo de cada tecnología con su color de marca (Simple Icons, licencia CC0)
+import {
+	siCss,
+	siFigma,
+	siGit,
+	siGithub,
+	siHtml5,
+	siJavascript,
+	siMysql,
+	siNextdotjs,
+	siPhp,
+	siPostgresql,
+	siReact,
+	siSupabase,
+	siTailwindcss,
+	siTypescript,
+	siWordpress,
+	type SimpleIcon,
+} from "simple-icons";
+import PhalconLogo from "@/icons/phalcon.svg";
+
+interface Props {
+	name: string;
+	class?: string;
+}
+
+const BRANDS: Record<string, SimpleIcon> = {
+	Figma: siFigma,
+	HTML: siHtml5,
+	CSS: siCss,
+	JavaScript: siJavascript,
+	Tailwind: siTailwindcss,
+	TypeScript: siTypescript,
+	MySQL: siMysql,
+	Git: siGit,
+	GitHub: siGithub,
+	Wordpress: siWordpress,
+	React: siReact,
+	"Next.js": siNextdotjs,
+	Postgres: siPostgresql,
+	Supabase: siSupabase,
+	PHP: siPhp,
+};
+
+// Sin logo de marca: íconos genéricos (trazo) en el color de acento
+const GENERIC: Record<string, string> = {
+	"Soporte TI": "M4 5h16v10H4zM8 19h8m-4-4v4",
+	"IT Support": "M4 5h16v10H4zM8 19h8m-4-4v4",
+};
+
+const { name, class: className } = Astro.props;
+const brand = BRANDS[name];
+// Marcas negras (Next.js, GitHub) desaparecerían en modo oscuro: usan el color del texto
+const isDark = brand && parseInt(brand.hex.slice(0, 2), 16) + parseInt(brand.hex.slice(2, 4), 16) + parseInt(brand.hex.slice(4, 6), 16) < 120;
+---
+
+{
+	name === "Phalcon" ? (
+		<PhalconLogo class={className} aria-hidden="true" />
+	) : brand ? (
+		<svg class={className} viewBox="0 0 24 24" fill={isDark ? "currentColor" : `#${brand.hex}`} aria-hidden="true">
+			<path d={brand.path} />
+		</svg>
+	) : (
+		GENERIC[name] && (
+			<svg class:list={[className, "text-accent"]} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<path d={GENERIC[name]} />
+			</svg>
+		)
+	)
+}

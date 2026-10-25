@@ -1,33 +1,5 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import CvPrint from "@/components/CvPrint.astro";
-import { basics } from "@cv";
+import CvLayout from "@/layouts/CvLayout.astro";
 ---
 
-<Layout title={`${basics.name} | Resume`}>
-	<div class="no-print mx-auto flex max-w-[210mm] items-center justify-between gap-4 px-5 py-6">
-		<a href="/" class="text-[15px] text-muted transition-colors hover:text-ink">← Volver al portafolio</a>
-		<button type="button" data-print class="btn-primary">Save as PDF</button>
-	</div>
-	<div class="sheet mx-auto mb-16 w-fit shadow-2xl shadow-wine/15">
-		<CvPrint lang="en" onScreen />
-	</div>
-</Layout>
-
-<script>
-	document.querySelector("[data-print]")?.addEventListener("click", () => window.print());
-</script>
-
-<style>
-	@media print {
-		.sheet {
-			margin: 0;
-			box-shadow: none;
-		}
-	}
-	@media screen and (max-width: 220mm) {
-		.sheet {
-			zoom: 0.45;
-		}
-	}
-</style>
+<CvLayout lang="en" />

@@ -18,9 +18,9 @@ const SOCIAL_ICONS: Record<string, Component> = {
 };
 ---
 
-<section id="inicio" class="grid gap-12 pb-20 pt-14 md:pt-20 lg:grid-cols-12 lg:items-end lg:gap-10">
-	<div class="lg:col-span-8">
-		<p data-rise class="no-print mb-8 flex flex-wrap items-center gap-x-3 gap-y-1 text-[15px] text-muted">
+<section id="inicio" class="grid items-center pb-20 pt-10 md:pt-20 lg:grid-cols-12 lg:gap-10">
+	<div class="min-w-0 lg:col-span-8">
+		<p data-rise class="no-print flex flex-wrap items-center gap-x-3 gap-y-1 text-[15px] text-muted">
 			<span class="inline-flex items-center gap-2 font-medium text-ink">
 				<span class="relative flex size-2" aria-hidden="true">
 					<span class="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60 motion-reduce:hidden"></span>
@@ -30,7 +30,16 @@ const SOCIAL_ICONS: Record<string, Component> = {
 			</span>
 		</p>
 
-		<h1 class="no-print max-w-[17ch] text-[clamp(2.5rem,6.2vw,4.75rem)] font-bold leading-[1.04] tracking-[-0.035em]">
+		<!-- Móvil: la foto flota a la derecha y el titular la rodea -->
+		<img
+			src={image}
+			alt=""
+			width="572"
+			height="1024"
+			class="mobile-photo float-right ml-3 mt-9 aspect-square w-[64px] min-[360px]:ml-4 min-[360px]:w-[92px] rounded-2xl bg-wine object-cover object-[50%_20%] shadow-[0_0_36px_rgba(var(--accent),0.35)] sm:w-[132px] lg:hidden"
+		/>
+
+		<h1 class="no-print mt-8 max-w-[17ch] text-[clamp(2.25rem,6.2vw,4.75rem)] min-[360px]:text-[clamp(2.5rem,6.2vw,4.75rem)] font-bold leading-[1.04] tracking-[-0.035em]">
 			{
 				headlineWords.map((word, i) => (
 					<>
@@ -42,17 +51,19 @@ const SOCIAL_ICONS: Record<string, Component> = {
 			}
 		</h1>
 
-		<p data-rise class="mt-8 max-w-[60ch] text-[18px] leading-relaxed text-muted">
+		<p data-rise class="clear-both mt-8 max-w-[60ch] text-[18px] leading-relaxed text-muted">
 			{summary}
 		</p>
 
 		<div data-rise class="no-print mt-10 flex flex-wrap items-center gap-3">
-			<a href={`mailto:${email}`} class="btn-primary">
-				<Mail />
-				Escríbeme
-			</a>
-			<button type="button" data-print class="btn-ghost">Guardar CV en PDF</button>
-			<a href="/cv-en" class="btn-ghost" hreflang="en">CV en inglés</a>
+			<div class="flex flex-wrap gap-2 sm:gap-3">
+				<a href={`mailto:${email}`} class="btn-primary">
+					<Mail />
+					Escríbeme
+				</a>
+				<a href="/cv" class="btn-ghost">Ver CV</a>
+				<a href="/cv-en" class="btn-ghost" hreflang="en">CV en inglés</a>
+			</div>
 			<div class="flex gap-2 sm:ml-2">
 				{
 					profiles.map(({ network, url }) => {
@@ -75,7 +86,7 @@ const SOCIAL_ICONS: Record<string, Component> = {
 		</div>
 	</div>
 
-	<figure class="photo no-print relative order-first max-w-[132px] sm:max-w-[200px] lg:order-none lg:col-span-4 lg:max-w-none">
+	<figure class="photo no-print relative hidden w-full max-w-[320px] justify-self-end lg:col-span-4 lg:block">
 		<!-- Halo con los colores de la foto y del logo -->
 		<div class="halo pointer-events-none absolute -inset-6 rounded-[40px] opacity-70 blur-2xl motion-reduce:animate-none dark:opacity-60" aria-hidden="true"></div>
 		<div class="photo-frame relative overflow-hidden rounded-3xl bg-wine">
@@ -84,20 +95,16 @@ const SOCIAL_ICONS: Record<string, Component> = {
 				alt={`Retrato de ${name}`}
 				width="572"
 				height="1024"
-				class="aspect-square w-full object-cover object-[50%_20%] lg:aspect-[4/5]"
+				class="aspect-[4/5] w-full object-cover object-[50%_20%]"
 				fetchpriority="high"
 			/>
 		</div>
-		<figcaption class="absolute -bottom-3 left-3 hidden items-center gap-1.5 rounded-full bg-surface px-3 py-1.5 text-[13px] font-medium shadow-lg shadow-wine/10 sm:inline-flex lg:-left-5 lg:bottom-6">
+		<figcaption class="absolute -left-5 bottom-6 inline-flex items-center gap-1.5 rounded-full bg-surface px-3 py-1.5 text-[13px] font-medium shadow-lg shadow-wine/10">
 			<span class="size-1.5 rounded-full bg-accent"></span>
 			{city}, {region}
 		</figcaption>
 	</figure>
 </section>
-
-<script>
-	document.querySelectorAll("[data-print]").forEach((el) => el.addEventListener("click", () => window.print()));
-</script>
 
 <style>
 	@keyframes rise {
@@ -154,6 +161,9 @@ const SOCIAL_ICONS: Record<string, Component> = {
 
 	.photo-frame {
 		animation: unveil 1.1s cubic-bezier(0.7, 0, 0.2, 1) 200ms both;
+	}
+	.mobile-photo {
+		animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 300ms both;
 	}
 	.photo-frame img {
 		animation: photo-zoom 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) 200ms both;
