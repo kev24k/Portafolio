@@ -18,6 +18,7 @@ import {
 	siWordpress,
 	type SimpleIcon,
 } from "simple-icons";
+import PhalconLogo from "@/icons/phalcon.svg";
 
 interface Props {
 	name: string;
@@ -46,7 +47,6 @@ const BRANDS: Record<string, SimpleIcon> = {
 const GENERIC: Record<string, string> = {
 	"Soporte TI": "M4 5h16v10H4zM8 19h8m-4-4v4",
 	"IT Support": "M4 5h16v10H4zM8 19h8m-4-4v4",
-	Phalcon: "m8 7-5 5 5 5m8-10 5 5-5 5m-3-12-2 14",
 };
 
 const { name, class: className } = Astro.props;
@@ -56,7 +56,9 @@ const isDark = brand && parseInt(brand.hex.slice(0, 2), 16) + parseInt(brand.hex
 ---
 
 {
-	brand ? (
+	name === "Phalcon" ? (
+		<PhalconLogo class={className} aria-hidden="true" />
+	) : brand ? (
 		<svg class={className} viewBox="0 0 24 24" fill={isDark ? "currentColor" : `#${brand.hex}`} aria-hidden="true">
 			<path d={brand.path} />
 		</svg>
