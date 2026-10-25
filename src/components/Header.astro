@@ -1,0 +1,63 @@
+---
+import ThemeSwitch from "@/components/ThemeSwitch.astro";
+import { basics } from "@cv";
+
+const { name } = basics;
+
+const links = [
+	{ href: "#proyectos", label: "Proyectos" },
+	{ href: "#experiencia", label: "Experiencia" },
+	{ href: "#contacto", label: "Contacto" },
+];
+---
+
+<header data-header class="no-print sticky top-0 z-30 border-b border-transparent bg-paper/80 backdrop-blur-md transition-colors duration-300 data-[scrolled]:border-line">
+	<div class="mx-auto flex h-16 max-w-page items-center justify-between gap-4 px-5 md:px-8">
+		<a href="#inicio" class="group flex items-center gap-2.5 font-semibold tracking-tight">
+			<img src="/logokevsinfondo.svg" alt="" class="h-7 w-auto transition-transform duration-500 group-hover:-rotate-12 group-hover:scale-110" width="25" height="28" />
+			<span>{name}</span>
+		</a>
+		<nav aria-label="Principal" class="flex items-center gap-1">
+			<ul class="hidden items-center gap-1 sm:flex">
+				{
+					links.map(({ href, label }) => (
+						<li>
+							<a href={href} data-nav-link class="nav-link relative rounded-full px-3 py-2 text-[15px] text-muted transition-colors hover:text-ink aria-[current]:text-ink">
+								{label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+			<button
+				type="button"
+				data-open-palette
+				class="hidden h-9 items-center gap-1 rounded-full border border-line px-3 text-[13px] text-muted transition-colors hover:border-ink hover:text-ink md:inline-flex"
+				aria-label="Abrir paleta de comandos"
+			>
+				<kbd class="font-sans">Ctrl</kbd><kbd class="font-sans">K</kbd>
+			</button>
+			<ThemeSwitch />
+		</nav>
+	</div>
+</header>
+
+<style>
+	/* Subrayado naranja que crece en el enlace activo o con hover */
+	.nav-link::after {
+		content: "";
+		position: absolute;
+		left: 0.75rem;
+		right: 0.75rem;
+		bottom: 0.3rem;
+		height: 2px;
+		border-radius: 2px;
+		background: rgb(var(--accent));
+		transform: scaleX(0);
+		transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+	}
+	.nav-link:hover::after,
+	.nav-link[aria-current]::after {
+		transform: scaleX(1);
+	}
+</style>

@@ -1,0 +1,218 @@
+---
+// CV en formato Harvard. En la portada solo aparece al imprimir; en /cv-en se ve también en pantalla
+import cvEs from "@cv";
+import cvEn from "../../cv.en.json";
+import { formatMonthYear, formatYear } from "@/utils/dates";
+
+interface Props {
+	lang?: "es" | "en";
+	onScreen?: boolean;
+}
+
+const { lang = "es", onScreen = false } = Astro.props;
+// cv.json es un superconjunto del inglés, así que ambos comparten el mismo tipo
+const cv: typeof cvEn = lang === "en" ? cvEn : cvEs;
+const { basics, education, work, projects, skills, certificates, languages } = cv;
+
+const LABELS = {
+	es: { education: "Educación", experience: "Experiencia", projects: "Proyectos", extra: "Certificaciones, habilidades e idiomas", tech: "Tecnologías", skills: "Técnicas", languages: "Idiomas" },
+	en: { education: "Education", experience: "Experience", projects: "Projects", extra: "Certifications, skills & languages", tech: "Technologies", skills: "Technical", languages: "Languages" },
+}[lang];
+
+const { name, email, phone, location, profiles } = basics;
+const bareUrl = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+
+const contact = [
+	{ text: `${location.city}, ${location.region}` },
+	{ text: phone, href: `tel:${phone.replace(/\s/g, "")}` },
+	{ text: email, href: `mailto:${email}` },
+	...profiles.map(({ url }) => ({ text: bareUrl(url), href: url })),
+];
+
+const range = (start: string, end: string | null) => `${formatMonthYear(start, lang)} – ${formatMonthYear(end, lang)}`;
+// Solo proyectos publicados: un reclutador debe poder abrirlos
+const liveProjects = projects.filter(({ url }) => url && url !== "/" && url !== "#");
+---
+
+<article class:list={["cv", !onScreen && "print-only"]} aria-hidden={onScreen ? undefined : "true"} lang={lang}>
+	<header>
+		<h1>{name}</h1>
+		<p class="contact">
+			{
+				contact.map(({ text, href }, i) => (
+					<>
+						{i > 0 && <span class="sep">|</span>}
+						{href ? <a href={href}>{text}</a> : text}
+					</>
+				))
+			}
+		</p>
+	</header>
+
+	<section>
+		<h2>{LABELS.education}</h2>
+		{
+			education.map(({ institution, location, area, startDate, endDate }) => (
+				<div class="entry">
+					<div class="row">
+						<strong>{institution}</strong>
+						<span>{location}</span>
+					</div>
+					<div class="row">
+						<em>{area}</em>
+						<em>
+							{formatYear(startDate, lang)} – {formatYear(endDate, lang)}
+						</em>
+					</div>
+				</div>
+			))
+		}
+	</section>
+
+	<section>
+		<h2>{LABELS.experience}</h2>
+		{
+			work.map(({ name, location, position, startDate, endDate, responsibilities, achievements, skills }) => (
+				<div class="entry">
+					<div class="row">
+						<strong>{name}</strong>
+						<span>{location}</span>
+					</div>
+					<div class="row">
+						<em>{position}</em>
+						<em>{range(startDate, endDate)}</em>
+					</div>
+					<ul>
+						{[...(achievements ?? []), ...(responsibilities ?? [])].map((item) => (
+							<li>{item}</li>
+						))}
+						{skills?.length && (
+							<li>
+								<span class="label">{LABELS.tech}:</span> {skills.join(", ")}.
+							</li>
+						)}
+					</ul>
+				</div>
+			))
+		}
+	</section>
+
+	<section>
+		<h2>{LABELS.projects}</h2>
+		{
+			liveProjects.map(({ name, description, url }) => (
+				<div class="entry tight">
+					<div class="row">
+						<strong>{name}</strong>
+						<a href={url}>{bareUrl(url)}</a>
+					</div>
+					<p>{description}</p>
+				</div>
+			))
+		}
+	</section>
+
+	<section>
+		<h2>{LABELS.extra}</h2>
+		{
+			certificates.map(({ name, issuer, date }) => (
+				<div class="row">
+					<span>
+						<strong>{name}</strong>, {issuer}
+					</span>
+					<span>{formatYear(date, lang)}</span>
+				</div>
+			))
+		}
+		<p><span class="label">{LABELS.skills}:</span> {skills.map(({ name }) => name).join(", ")}.</p>
+		<p><span class="label">{LABELS.languages}:</span> {languages.map(({ language, fluency }) => `${language} (${fluency.toLowerCase()})`).join(", ")}.</p>
+	</section>
+</article>
+
+<style>
+	/* El margen va aquí y no en @page, así no depende de la configuración de impresión */
+	.cv {
+		box-sizing: border-box;
+		width: 210mm;
+		padding: 13mm 17mm 10mm;
+		color: #111;
+		background: #fff;
+		font-family: "EB Garamond", Garamond, "Times New Roman", serif;
+		font-size: 10.75pt;
+		line-height: 1.24;
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+	}
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+	em {
+		font-style: italic;
+	}
+	strong,
+	.label {
+		font-weight: 600;
+	}
+
+	header {
+		text-align: center;
+		padding-bottom: 2pt;
+	}
+	h1 {
+		font-size: 22pt;
+		font-weight: 600;
+		line-height: 1.1;
+		letter-spacing: 0.01em;
+	}
+	.contact {
+		margin-top: 4pt;
+		font-size: 10.5pt;
+	}
+	.sep {
+		margin: 0 6pt;
+		color: #888;
+	}
+
+	h2 {
+		font-size: 12pt;
+		font-weight: 600;
+		font-variant: small-caps;
+		letter-spacing: 0.06em;
+		border-bottom: 0.6pt solid #111;
+		padding-bottom: 1.5pt;
+		margin: 8pt 0 4pt;
+	}
+	.entry {
+		margin-bottom: 4pt;
+		break-inside: avoid;
+	}
+	.entry.tight {
+		margin-bottom: 2.5pt;
+	}
+	.row {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 14pt;
+	}
+	.row > :last-child:not(:first-child) {
+		flex-shrink: 0;
+		text-align: right;
+	}
+	ul {
+		list-style: disc;
+		padding-left: 15pt;
+		margin-top: 2pt;
+	}
+	li {
+		padding-left: 2pt;
+		margin-bottom: 0.5pt;
+	}
+	li::marker {
+		font-size: 0.85em;
+	}
+	section > .row:last-of-type {
+		margin-bottom: 3pt;
+	}
+</style>

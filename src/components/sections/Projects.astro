@@ -1,126 +1,97 @@
 ---
 import Section from "../Section.astro";
 import { projects } from "@cv";
+
+// Los dos primeros proyectos se muestran destacados a ancho completo
+const FEATURED = 2;
+
+const items = projects.map((project) => {
+	const screenshots = project.images?.length ? project.images : project.image ? [project.image] : [];
+	const destination = project.url && project.url !== "/" && project.url !== "#" ? project.url : undefined;
+	const host = destination ? new URL(destination).hostname.replace(/^www\./, "") : undefined;
+	return { ...project, screenshots, destination, host };
+});
 ---
 
-<Section className={Astro.props.className} title="Proyectos">
-	<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 print:hidden">
+<Section id="proyectos" title="Proyectos" className="no-print">
+	<p slot="aside" class="text-[15px] text-muted">{projects.length} trabajos publicados y en desarrollo</p>
+
+	<div class="grid gap-6 md:grid-cols-2 md:gap-8">
 		{
-			projects.map(({ url, description, highlights, name, isActive, image, images }) => {
-				const imagesToDisplay = images && images.length > 0 ? images : (image ? [image] : []);
+			items.map(({ name, description, highlights, screenshots, destination, host }, index) => {
+				// Si la cuadrícula queda impar, el último también ocupa el ancho completo
+				const isOrphan = index === items.length - 1 && (items.length - FEATURED) % 2 === 1;
+				const featured = index < FEATURED || isOrphan;
+				const Card = destination ? "a" : "article";
 
 				return (
-					<a 
-						href={url || "#"} 
-						target={url ? "_blank" : "_self"}
-						rel="noopener noreferrer"
-						title={`Ver proyecto ${name}`}
-						class="group flex flex-col gap-3"
+					<Card
+						href={destination}
+						target={destination ? "_blank" : undefined}
+						rel={destination ? "noopener noreferrer" : undefined}
+						data-reveal="scale"
+						data-spotlight
+						style={`--d:${featured ? 0 : (index % 2) * 120}ms`}
+						class:list={[
+							"group flex flex-col overflow-hidden rounded-[20px] border border-line bg-surface transition-[border-color,box-shadow] duration-500",
+							destination && "hover:border-accent/50 hover:shadow-2xl hover:shadow-wine/10",
+							featured && "md:col-span-2 md:grid md:grid-cols-12",
+						]}
 					>
-						<div class="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-skin-hue/10 bg-skin-button-muted shadow-sm transition-all duration-500 ease-out group-hover:scale-[1.02] group-hover:shadow-xl group-hover:shadow-skin-hue/20">
-							{imagesToDisplay.length === 1 && (
-								<img 
-									src={imagesToDisplay[0]} 
-									alt={`Captura de pantalla del proyecto ${name}`} 
-									class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-									loading="lazy"
-								/>
-							)}
-							{imagesToDisplay.length > 1 && (
-								<div class="project-image-stack relative w-full h-full cursor-pointer group/stack">
-									<img 
-										src={imagesToDisplay[0]} 
-										alt={`Captura de pantalla 1 del proyecto ${name}`} 
-										class="absolute bottom-0 left-0 w-[95%] h-[95%] object-cover rounded-xl shadow-lg transition-all duration-500 z-10 active-img"
-										loading="lazy"
-									/>
-									<img 
-										src={imagesToDisplay[1]} 
-										alt={`Captura de pantalla 2 del proyecto ${name}`} 
-										class="absolute top-0 right-0 w-[95%] h-[95%] object-cover rounded-xl shadow-lg transition-all duration-500 z-0 opacity-60 scale-95 inactive-img"
-										loading="lazy"
-									/>
+						<div
+							class:list={[
+								"relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-wine/[0.07] via-paper to-amber/[0.12] px-5 pt-5 sm:px-8 sm:pt-8",
+								featured && "md:col-span-7 md:aspect-auto md:min-h-[380px]",
+							]}
+						>
+							<div class="relative h-full overflow-hidden rounded-t-xl border border-b-0 border-line bg-surface transition-transform duration-700 ease-out group-hover:-translate-y-1.5">
+								<div class="flex h-7 items-center border-b border-line px-3" aria-hidden="true">
+									<span class="truncate text-[11px] text-muted">{host ?? name}</span>
 								</div>
-							)}
-							<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"></div>
-						</div>
-
-						<div class="flex flex-col gap-2 px-1">
-							<div class="flex items-center justify-between">
-								<h3 class="font-bold text-lg text-skin-base group-hover:text-skin-hue transition-colors">
-									{name}
-								</h3>
-								{isActive ? (
-									<span class="relative flex h-2.5 w-2.5">
-									  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-									  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
-									</span>
+								{screenshots[0] ? (
+									<img
+										src={screenshots[0]}
+										alt={`Captura de ${name}`}
+										class="absolute inset-x-0 bottom-0 top-7 h-[calc(100%-1.75rem)] w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+										loading={index < FEATURED ? "eager" : "lazy"}
+										decoding="async"
+									/>
 								) : (
-									<span class="h-2 w-2 rounded-full bg-skin-muted/50"></span>
+									<div class="flex h-full items-center justify-center text-sm text-muted">Sin captura</div>
 								)}
 							</div>
-
-							<p class="text-sm text-skin-muted line-clamp-2 leading-relaxed">{description}</p>
-
-							<div class="flex flex-wrap gap-2 mt-1">
-								{highlights.map((highlight) => {
-									return (
-										<span class="rounded-md bg-skin-button-accent/10 px-2 py-0.5 text-[10px] font-medium text-skin-muted uppercase tracking-wider border border-skin-hue/5">
-											{highlight}
-										</span>
-									);
-								})}
-							</div>
+							{screenshots[1] && (
+								<div class="absolute bottom-0 right-5 h-[68%] w-[26%] translate-y-3 overflow-hidden rounded-t-[14px] border-[3px] border-b-0 border-ink bg-ink shadow-2xl transition-transform duration-700 ease-out group-hover:-translate-y-2 group-hover:-rotate-2 sm:right-8" aria-hidden="true">
+									<img src={screenshots[1]} alt="" class="size-full rounded-t-[11px] object-cover object-top" loading="lazy" decoding="async" />
+								</div>
+							)}
 						</div>
-					</a>
+
+						<div class:list={["flex flex-1 flex-col gap-4 p-6 sm:p-8", featured && "md:col-span-5 md:justify-center md:p-10"]}>
+							<h3 class:list={["font-bold leading-tight tracking-[-0.02em]", featured ? "text-[26px] md:text-[30px]" : "text-[22px]"]}>{name}</h3>
+							<p class="max-w-[52ch] text-muted">{description}</p>
+							<ul class="flex flex-wrap gap-2" aria-label="Características">
+								{highlights.map((highlight) => (
+									<li class="tag">{highlight}</li>
+								))}
+							</ul>
+							<p class="mt-auto pt-2 text-[15px] font-semibold">
+								{destination ? (
+									<span class="inline-flex items-center gap-1.5 text-accent-ink">
+										Visitar {host}
+										<svg class="size-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+											<path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z" clip-rule="evenodd" />
+										</svg>
+										<span class="sr-only">(se abre en una pestaña nueva)</span>
+									</span>
+								) : (
+									<span class="text-muted">Proyecto privado, disponible bajo solicitud</span>
+								)}
+							</p>
+						</div>
+					</Card>
 				);
 			})
 		}
 	</div>
 </Section>
-
-<script>
-	document.addEventListener('DOMContentLoaded', () => {
-		const stacks = document.querySelectorAll('.project-image-stack');
-
-		stacks.forEach(stack => {
-			stack.addEventListener('click', (e) => {
-				e.preventDefault(); // Prevent link navigation
-				e.stopPropagation(); // Stop event bubbling
-				
-				const imgs = stack.querySelectorAll('img');
-				if (imgs.length < 2) return;
-
-				const img1 = imgs[0];
-				const img2 = imgs[1];
-
-				// Check current state
-				const isImg1Active = img1.classList.contains('z-10');
-
-				if (isImg1Active) {
-					// Swap: Img 1 goes to back, Img 2 comes to front
-					img1.classList.replace('z-10', 'z-0');
-					img1.classList.replace('bottom-0', 'top-0');
-					img1.classList.replace('left-0', 'right-0');
-					img1.classList.add('opacity-60', 'scale-95');
-
-					img2.classList.replace('z-0', 'z-10');
-					img2.classList.replace('top-0', 'bottom-0');
-					img2.classList.replace('right-0', 'left-0');
-					img2.classList.remove('opacity-60', 'scale-95');
-				} else {
-					// Reset: Img 1 comes to front, Img 2 goes to back
-					img1.classList.replace('z-0', 'z-10');
-					img1.classList.replace('top-0', 'bottom-0');
-					img1.classList.replace('right-0', 'left-0');
-					img1.classList.remove('opacity-60', 'scale-95');
-
-					img2.classList.replace('z-10', 'z-0');
-					img2.classList.replace('bottom-0', 'top-0');
-					img2.classList.replace('left-0', 'right-0');
-					img2.classList.add('opacity-60', 'scale-95');
-				}
-			});
-		});
-	});
-</script>

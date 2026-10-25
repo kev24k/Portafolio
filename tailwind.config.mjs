@@ -12,41 +12,24 @@ export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
-      textColor: {
-        skin: {
-          base: withOpacity("--color-text-base"),
-          muted: withOpacity("--color-text-muted"),
-          inverted: withOpacity("--color-text-inverted"),
-        },
-      },
-      backgroundColor: {
-        skin: {
-          fill: withOpacity("--color-fill"),
-          "button-accent": withOpacity("--color-button-accent"),
-          "button-accent-hover": withOpacity("--color-button-accent-hover"),
-          "button-muted": withOpacity("--color-button-muted"),
-        },
-      },
       colors: {
-        skin: {
-          hue: withOpacity("--color"),
-          muted: withOpacity("--muted"),
-        },
+        paper: withOpacity("--paper"),
+        surface: withOpacity("--surface"),
+        ink: withOpacity("--ink"),
+        muted: withOpacity("--muted"),
+        line: withOpacity("--line"),
+        accent: withOpacity("--accent"),
+        "accent-ink": withOpacity("--accent-ink"),
+        wine: withOpacity("--wine"),
+        amber: withOpacity("--amber"),
       },
-      ringColor: {
-        skin: {
-          fill: withOpacity("--color-fill"),
-        },
+      fontFamily: {
+        sans: ["'Schibsted Grotesk'", "system-ui", "sans-serif"],
       },
-      gradientColorStops: {
-        skin: {
-          hue: withOpacity("--color-fill"),
-        },
+      maxWidth: {
+        page: "72rem",
       },
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [],
 };

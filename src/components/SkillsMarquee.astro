@@ -1,0 +1,42 @@
+---
+import { skills } from "@cv";
+import { getSkillIcon } from "@/icons/skills";
+
+// La lista se duplica para que el desplazamiento sea continuo
+const loop = [...skills, ...skills];
+---
+
+<div class="marquee no-print group relative -mx-5 overflow-hidden border-y border-line py-5 md:-mx-8" aria-label="Tecnologías con las que trabajo">
+	<ul class="flex w-max gap-10 pr-10 group-hover:[animation-play-state:paused]">
+		{
+			loop.map(({ name }, i) => {
+				const Icon = getSkillIcon(name);
+				return (
+					<li class="flex items-center gap-2.5 whitespace-nowrap text-[17px] font-medium text-muted [&>svg]:size-5" aria-hidden={i >= skills.length ? "true" : undefined}>
+						{Icon && <Icon />}
+						{name}
+					</li>
+				);
+			})
+		}
+	</ul>
+</div>
+
+<style>
+	.marquee {
+		mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+	}
+	.marquee ul {
+		animation: marquee 45s linear infinite;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.marquee ul {
+			animation: none;
+			flex-wrap: wrap;
+			width: auto;
+		}
+		.marquee li[aria-hidden] {
+			display: none;
+		}
+	}
+</style>

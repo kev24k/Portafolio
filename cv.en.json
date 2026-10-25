@@ -1,0 +1,214 @@
+{
+  "basics": {
+    "name": "Kevin Jimenez",
+    "label": "Full Stack Developer",
+    "email": "kevinjimenezm24@gmail.com",
+    "phone": "+51 940 898 689",
+    "location": {
+      "city": "Cusco",
+      "region": "Peru"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "Kev Jimenez",
+        "url": "https://www.linkedin.com/in/kev-jimenez/"
+      },
+      {
+        "network": "GitHub",
+        "username": "kev24k",
+        "url": "https://github.com/kev24k"
+      }
+    ]
+  },
+  "education": [
+    {
+      "institution": "Universidad Continental",
+      "location": "Cusco, Peru",
+      "area": "B.S. in Systems and Computer Engineering",
+      "startDate": "2024-03-01",
+      "endDate": null
+    },
+    {
+      "institution": "Instituto Khipu",
+      "location": "Cusco, Peru",
+      "area": "Professional Degree in Information Systems Development",
+      "startDate": "2021-09-01",
+      "endDate": "2024-02-01"
+    }
+  ],
+  "work": [
+    {
+      "name": "InkaCode",
+      "location": "Cusco, Peru",
+      "position": "Founder & Full Stack Developer",
+      "startDate": "2024-01-01",
+      "endDate": null,
+      "achievements": [
+        "Founded InkaCode and built its electronic invoicing system, now used by more than 50 businesses.",
+        "Designed and built the InkaCode marketing website to present its services and attract clients.",
+        "Delivered web projects for 2 freelance clients, from design to launch."
+      ],
+      "responsibilities": [
+        "Built the system backend with Phalcon (PHP) and MySQL; currently planning its migration to Go.",
+        "Maintain and continuously improve the system: invoices, sales and inventory."
+      ],
+      "skills": [
+        "Phalcon",
+        "PHP",
+        "MySQL",
+        "Astro",
+        "Tailwind",
+        "HTML"
+      ]
+    },
+    {
+      "name": "Green Point Restaurant",
+      "location": "Cusco, Peru",
+      "position": "Head of IT",
+      "startDate": "2025-06-12",
+      "endDate": "2026-09-10",
+      "achievements": [
+        "Built the digital menu, letting guests browse available dishes and book faster.",
+        "Installed the restaurant's network cabling and deployed a third-party invoicing system."
+      ],
+      "responsibilities": [
+        "Led the IT area and provided technical support to nearly all restaurant staff.",
+        "Kept the network and computer equipment stable and running."
+      ],
+      "skills": [
+        "JavaScript",
+        "HTML",
+        "IT Support",
+        "Astro",
+        "Tailwind",
+        "Postgres"
+      ]
+    },
+    {
+      "name": "AYD Manufacturas",
+      "location": "Cusco, Peru",
+      "position": "Software Developer",
+      "startDate": "2023-03-31",
+      "endDate": "2023-11",
+      "achievements": [
+        "Built the company's WordPress e-commerce site, with a catalog of custom products and services."
+      ],
+      "responsibilities": [
+        "Maintained the online store and published new products and services.",
+        "Designed banners and graphic materials for campaigns and internal training."
+      ],
+      "skills": [
+        "Wordpress",
+        "HTML",
+        "Figma"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Green Point Digital Menu",
+      "description": "Interactive menu platform for Green Point restaurant in Cusco.",
+      "url": "https://menu.greenpointcusco.com/"
+    },
+    {
+      "name": "InkaCode · Marketing website",
+      "description": "Designed and built InkaCode's website to present its services and e-invoicing solution.",
+      "url": "https://inkacode.com"
+    },
+    {
+      "name": "Machupicchu Reps",
+      "description": "Website for a Cusco travel agency to discover and explore experiences in the Andes.",
+      "url": "https://machupicchureps.com"
+    },
+    {
+      "name": "InkaCode · Invoicing system",
+      "description": "Electronic invoicing system to manage receipts, sales and inventory in one place.",
+      "url": "https://inkacode.com"
+    },
+    {
+      "name": "Tierra Fértil",
+      "description": "Landing page that centralizes the social channels of the real estate company Tierra Fértil.",
+      "url": "https://tierrafertil.pe"
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Professional Degree in Information Systems Development",
+      "issuer": "I.E.S.P Khipu",
+      "date": "2024-05-15"
+    },
+    {
+      "name": "Graduate, Information Systems Development program",
+      "issuer": "I.E.S.P Khipu",
+      "date": "2023-05-01"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Figma"
+    },
+    {
+      "name": "HTML"
+    },
+    {
+      "name": "CSS"
+    },
+    {
+      "name": "JavaScript"
+    },
+    {
+      "name": "Tailwind"
+    },
+    {
+      "name": "TypeScript"
+    },
+    {
+      "name": "MySQL"
+    },
+    {
+      "name": "Git"
+    },
+    {
+      "name": "GitHub"
+    },
+    {
+      "name": "Wordpress"
+    },
+    {
+      "name": "IT Support"
+    },
+    {
+      "name": "React"
+    },
+    {
+      "name": "Next.js"
+    },
+    {
+      "name": "Postgres"
+    },
+    {
+      "name": "Supabase"
+    },
+    {
+      "name": "PHP"
+    },
+    {
+      "name": "Phalcon"
+    }
+  ],
+  "languages": [
+    {
+      "language": "Spanish",
+      "fluency": "Native"
+    },
+    {
+      "language": "English",
+      "fluency": "Basic"
+    },
+    {
+      "language": "Quechua",
+      "fluency": "Basic comprehension"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ---
+import "@/styles/global.css";
 import { basics } from "@cv";
-
 
 interface Props {
 	title: string;
@@ -8,16 +8,16 @@ interface Props {
 
 const { title } = Astro.props;
 
-const { image, summary, url, theme } = basics;
+const { image, summary, url } = basics;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<title>{title}</title>
 		<meta name="description" content={summary} />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/logokevsinfondo.svg" />
 		<link rel="preload" as="image" href={image} />
 
@@ -25,137 +25,85 @@ const { image, summary, url, theme } = basics;
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={summary} />
-		<meta property="og:image" content="" />
+		<meta property="og:image" content={image} />
 
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta property="twitter:domain" content={url.split("//")[1] ?? ""} />
-		<meta property="twitter:url" content={url} />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={summary} />
-		<meta name="twitter:image" content="" />
 
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
 
-		<link rel="stylesheet" href="/themes/themes.css" />
-		
+		<!-- Aplica el tema antes de pintar para evitar el parpadeo -->
+		<script is:inline>
+			document.documentElement.classList.add("js");
+			const stored = localStorage.getItem("theme");
+			const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+			if (stored === "dark" || (stored !== "light" && prefersDark)) {
+				document.documentElement.classList.add("dark");
+			}
+		</script>
 	</head>
-	<body data-theme={theme} class="relative bg-skin-fill text-skin-base selection:bg-skin-hue selection:text-white">
-		<div class="fixed inset-0 -z-10 h-full w-full bg-skin-fill [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] opacity-5 dark:opacity-20"></div>
-		<div class="fixed inset-0 -z-10 h-full w-full bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
-		
+	<body>
+		<div class="scroll-progress no-print" aria-hidden="true"></div>
 		<slot />
 		<style is:global>
-			:root {
-				--color-text-base: #1f2937;
-				--color-text-muted: #6b7280;
+			/* Barra de progreso de lectura (solo navegadores con scroll-driven animations) */
+			.scroll-progress {
+				display: none;
+			}
+			@supports (animation-timeline: scroll()) {
+				.scroll-progress {
+					display: block;
+					position: fixed;
+					inset: 0 0 auto 0;
+					z-index: 50;
+					height: 2px;
+					transform-origin: left;
+					background: linear-gradient(to right, rgb(var(--wine)), rgb(var(--accent)), rgb(var(--amber)));
+					animation: grow-x linear both;
+					animation-timeline: scroll(root);
+				}
+				@keyframes grow-x {
+					from {
+						transform: scaleX(0);
+					}
+				}
 			}
 
-			body {
-				margin: 0;
-				padding: 0;
-				font-family: 'Onest', system-ui, sans-serif;
-				-webkit-font-smoothing: antialiased;
-				-moz-osx-font-smoothing: grayscale;
-			}
-
-			figure {
-				margin: 0;
-				padding: 0;
-			}
-
-			a {
-				text-decoration: none;
-			}
-
-			ul {
-				list-style: none;
-				margin: 0;
-				padding: 0;
-			}
-
-			*,
-			*::before,
-			*::after {
-				box-sizing: border-box;
-			}
-
-			h1, h2, h3, h4 {
-				@apply text-skin-base font-bold;
-				letter-spacing: -0.025em;
-			}
-			
-			h1 {
-				@apply text-4xl md:text-5xl;
-			}
-
-			h2 {
-				@apply text-lg md:text-xl text-skin-muted font-medium;
-			}
-
-			h3 {
-				@apply text-2xl font-semibold mb-4 text-skin-base;
-			}
-
-			p {
-				@apply text-skin-muted text-[15px] leading-relaxed;
-				text-wrap: pretty;
-			}
-
-			.print {
+			.print-only {
 				display: none !important;
 			}
 
-			.dev * {
-				@apply border border-red-500/50 bg-red-500/5;
-			}
-			#hotkeypad [data-backdrop] {
-				@apply !bg-zinc-800 !opacity-80;
+			/* Sin margen de página: el CV pone el suyo, así no depende de la opción "Márgenes" del navegador */
+			@page {
+				size: A4;
+				margin: 0;
 			}
 
 			@media print {
-				html, body {
-					font-size: 10px !important;
+				html {
+					font-size: 11px;
 				}
 
-				h1 {
-					font-size: 18pt !important;
+				body {
+					background: #fff !important;
 				}
 
-				h2 {
-					font-size: 12pt !important;
-				}
-
-				h3 {
-					font-size: 11pt !important;
-					margin-bottom: 4px !important;
-				}
-
-				p, span, li, a {
-					font-size: 9pt !important;
-					line-height: 1.2 !important;
-				}
-
-				.no-print {
-					display: none !important;
-				}
-
-				.print {
-					display: block !important;
-				}
-
+				.no-print,
 				astro-dev-toolbar {
 					display: none !important;
 				}
 
-				article {
-					break-inside: avoid;
+				.print-only {
+					display: block !important;
 				}
 
-				section {
-					gap: 6px !important;
-					margin-bottom: 12px !important;
+				section,
+				article,
+				li {
+					break-inside: avoid;
 				}
 			}
 		</style>
