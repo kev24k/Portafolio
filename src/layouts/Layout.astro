@@ -36,6 +36,7 @@ const person = {
 	sameAs: profiles.map(({ url }) => url),
 };
 // Cloudflare Web Analytics: solo se carga si se define el token como variable de entorno al compilar
+const FONTS = "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap";
 const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
 ---
 
@@ -79,7 +80,10 @@ const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
+		<!-- Carga la fuente sin bloquear el primer pintado: se aplica cuando termina de descargar -->
+		<link rel="preload" as="style" href={FONTS} />
+		<link rel="stylesheet" href={FONTS} media="print" onload="this.media='all'" />
+		<noscript><link rel="stylesheet" href={FONTS} /></noscript>
 
 		<!-- Aplica el tema antes de pintar para evitar el parpadeo -->
 		<script is:inline>
