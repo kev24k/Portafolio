@@ -12,6 +12,8 @@ const { image, summary } = basics;
 // Con `site` definido en astro.config.mjs las URLs para redes sociales salen absolutas
 const pageUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 const ogImage = Astro.site ? new URL(image, Astro.site).href : image;
+// Cloudflare Web Analytics: solo se carga si se define el token como variable de entorno al compilar
+const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
 ---
 
 <!doctype html>
@@ -48,6 +50,7 @@ const ogImage = Astro.site ? new URL(image, Astro.site).href : image;
 				document.documentElement.classList.add("dark");
 			}
 		</script>
+		{analyticsToken && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: analyticsToken })}></script>}
 	</head>
 	<body>
 		<div class="scroll-progress no-print" aria-hidden="true"></div>
