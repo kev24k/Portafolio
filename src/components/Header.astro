@@ -9,6 +9,14 @@ const links = [
 	{ href: "#experiencia", label: "Experiencia" },
 	{ href: "#contacto", label: "Contacto" },
 ];
+
+// Barra inferior en móvil: los mismos destinos más Habilidades, con ícono de trazo
+const mobileLinks = [
+	{ href: "#proyectos", label: "Proyectos", icon: "M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" },
+	{ href: "#experiencia", label: "Experiencia", icon: "M9 6V4h6v2m-11 0h16v13H4zm0 6h16" },
+	{ href: "#habilidades", label: "Habilidades", icon: "m12 3 2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z" },
+	{ href: "#contacto", label: "Contacto", icon: "M4 5h16v14H4zm0 1 8 6 8-6" },
+];
 ---
 
 <header data-header class="no-print sticky top-0 z-30 border-b border-transparent bg-paper/80 backdrop-blur-md transition-colors duration-300 data-[scrolled]:border-line">
@@ -41,6 +49,23 @@ const links = [
 		</nav>
 	</div>
 </header>
+
+<nav aria-label="Secciones" class="no-print fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-30 sm:hidden">
+	<ul class="mx-auto flex max-w-sm items-stretch justify-between rounded-full border border-line bg-surface/90 p-1.5 shadow-xl shadow-wine/20 backdrop-blur-md">
+		{
+			mobileLinks.map(({ href, label, icon }) => (
+				<li class="flex-1">
+					<a href={href} data-nav-link class="flex flex-col items-center gap-0.5 rounded-full py-1.5 text-[11px] font-medium text-muted transition-colors aria-[current]:bg-accent/15 aria-[current]:text-accent-ink">
+						<svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<path d={icon} />
+						</svg>
+						{label}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</nav>
 
 <style>
 	/* Subrayado naranja que crece en el enlace activo o con hover */

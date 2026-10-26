@@ -16,7 +16,10 @@ const whatsapp = phone ? `https://wa.me/${phone.replace(/\D/g, "")}` : undefined
 		</p>
 
 		<div class="relative mt-10 flex flex-wrap items-center gap-3">
-			<a href={`mailto:${email}`} class="btn relative overflow-hidden bg-accent text-white transition-transform hover:-translate-y-0.5">Escribir a {email}</a>
+			<a href={`mailto:${email}`} class="btn relative overflow-hidden bg-accent text-white transition-transform hover:-translate-y-0.5">
+				<span class="sm:hidden">Escribir correo</span>
+				<span class="hidden sm:inline">Escribir a {email}</span>
+			</a>
 			<button type="button" id="copyEmail" data-email={email} class="btn border border-white/25 text-white hover:border-white" aria-live="polite">Copiar correo</button>
 			{whatsapp && (
 				<a href={whatsapp} target="_blank" rel="noopener noreferrer" class="btn border border-white/25 text-white hover:border-white">WhatsApp</a>
