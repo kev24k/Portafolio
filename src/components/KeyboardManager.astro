@@ -90,6 +90,17 @@ const profilesInfo = profiles.map(({ network, url }) => {
 			},
 		},
 		{
+			id: "cv-pdf",
+			title: "Descargar CV (PDF)",
+			icon: "",
+			hotkey: "ctrl+Y",
+			section: "Acciones",
+			handler: () => {
+				const link = Object.assign(document.createElement("a"), { href: "/kevin-jimenez-cv.pdf", download: "" });
+				link.click();
+			},
+		},
+		{
 			id: "cv-en",
 			title: "CV en inglés",
 			icon: "",
