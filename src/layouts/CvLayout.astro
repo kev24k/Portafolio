@@ -3,6 +3,7 @@
 import Layout from "@/layouts/Layout.astro";
 import CvPrint from "@/components/CvPrint.astro";
 import { basics } from "@cv";
+import cvEn from "../../cv.en.json";
 
 interface Props {
 	lang: "es" | "en";
@@ -15,7 +16,15 @@ const t = {
 }[lang];
 ---
 
-<Layout title={`${basics.name} | ${t.title}`}>
+<Layout
+	title={`${basics.name} | ${t.title}`}
+	lang={lang}
+	description={lang === "en" ? cvEn.basics.description : basics.description}
+	alternates={[
+		{ lang: "es", href: "/cv/" },
+		{ lang: "en", href: "/cv-en/" },
+	]}
+>
 	<div class="no-print mx-auto flex max-w-[210mm] items-center justify-between gap-4 px-5 py-6">
 		<p class="text-[15px] text-muted">
 			<a href="/" class="transition-colors hover:text-ink">← {t.back}</a>
