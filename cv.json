@@ -343,8 +343,8 @@
       ],
       "url": "https://inkacode.com",
       "images": [
-        "/inkacode-actual-desktop.png",
-        "/inkacode-actual-mobile.png"
+        "/inkacode-actual-desktop.webp",
+        "/inkacode-actual-mobile.webp"
       ]
     },
     {
@@ -357,8 +357,8 @@
       ],
       "url": "https://machupicchureps.com",
       "images": [
-        "/machupicchu-actual-desktop.png",
-        "/machupicchu-actual-mobile.png"
+        "/machupicchu-actual-desktop.webp",
+        "/machupicchu-actual-mobile.webp"
       ]
     },
     {
@@ -370,7 +370,7 @@
         "Ventas e inventario"
       ],
       "url": "https://inkacode.com",
-      "image": "/inkacode-app-actual.png"
+      "image": "/inkacode-app-actual.webp"
     },
     {
       "name": "Tierra Fértil",

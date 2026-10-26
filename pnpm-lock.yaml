@@ -20,9 +20,6 @@ importers:
       hotkeypad:
         specifier: 0.1.0
         version: 0.1.0
-      prettier-plugin-tailwindcss:
-        specifier: ^0.6.14
-        version: 0.6.14(prettier-plugin-astro@0.14.1)(prettier@3.8.0)
       tailwindcss:
         specifier: ^3.4.19
         version: 3.4.19(yaml@2.8.2)
@@ -30,9 +27,6 @@ importers:
         specifier: 5.3.3
         version: 5.3.3
     devDependencies:
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^8.53.0
-        version: 8.53.0(@typescript-eslint/parser@8.53.0(eslint@9.39.2(jiti@1.21.7))(typescript@5.3.3))(eslint@9.39.2(jiti@1.21.7))(typescript@5.3.3)
       '@typescript-eslint/parser':
         specifier: ^8.53.0
         version: 8.53.0(eslint@9.39.2(jiti@1.21.7))(typescript@5.3.3)
@@ -48,6 +42,9 @@ importers:
       prettier-plugin-astro:
         specifier: ^0.14.1
         version: 0.14.1
+      prettier-plugin-tailwindcss:
+        specifier: ^0.6.14
+        version: 0.6.14(prettier-plugin-astro@0.14.1)(prettier@3.8.0)
       simple-icons:
         specifier: ^16.36.0
         version: 16.36.0

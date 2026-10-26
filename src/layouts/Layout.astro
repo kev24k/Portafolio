@@ -8,7 +8,10 @@ interface Props {
 
 const { title } = Astro.props;
 
-const { image, summary, url } = basics;
+const { image, summary } = basics;
+// Con `site` definido en astro.config.mjs las URLs para redes sociales salen absolutas
+const pageUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const ogImage = Astro.site ? new URL(image, Astro.site).href : image;
 ---
 
 <!doctype html>
@@ -21,11 +24,12 @@ const { image, summary, url } = basics;
 		<link rel="icon" type="image/svg+xml" href="/logokevsinfondo.svg" />
 		<link rel="preload" as="image" href={image} />
 
-		<meta property="og:url" content={url} />
+		{pageUrl && <link rel="canonical" href={pageUrl} />}
+		{pageUrl && <meta property="og:url" content={pageUrl} />}
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={summary} />
-		<meta property="og:image" content={image} />
+		<meta property="og:image" content={ogImage} />
 
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />

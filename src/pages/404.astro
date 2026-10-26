@@ -1,0 +1,13 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { basics } from "@cv";
+---
+
+<Layout title={`Página no encontrada | ${basics.name}`}>
+	<main class="mx-auto flex min-h-[80vh] max-w-page flex-col items-start justify-center gap-6 px-5 md:px-8">
+		<p class="text-[15px] font-medium text-accent-ink">Error 404</p>
+		<h1 class="max-w-[18ch] text-[clamp(2.25rem,6vw,4rem)] font-bold leading-[1.05] tracking-[-0.03em]">Esta página no existe.</h1>
+		<p class="max-w-[52ch] text-[18px] text-muted">Puede que el enlace esté mal escrito o que la página se haya movido.</p>
+		<a href="/" class="btn-primary">Volver al portafolio</a>
+	</main>
+</Layout>

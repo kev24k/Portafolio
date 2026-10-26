@@ -1,0 +1,9 @@
+// Cloudflare Workers: sitio estático servido desde dist/ (Cloudflare Pages ignora este archivo)
+{
+	"name": "portafolio-kev",
+	"compatibility_date": "2026-10-01",
+	"assets": {
+		"directory": "./dist",
+		"not_found_handling": "404-page"
+	}
+}
