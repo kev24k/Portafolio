@@ -2,44 +2,88 @@
 import "@/styles/global.css";
 import { basics } from "@cv";
 
+import { education, skills, work } from "@cv";
+
 interface Props {
 	title: string;
+	description?: string;
+	lang?: "es" | "en";
+	noindex?: boolean;
+	// Versiones del mismo contenido en otro idioma (para Google)
+	alternates?: { lang: string; href: string }[];
 }
 
-const { title } = Astro.props;
+const { title, description = basics.description, lang = "es", noindex = false, alternates = [] } = Astro.props;
 
-const { image, summary } = basics;
+const { name, label, image, profiles, location } = basics;
 // Con `site` definido en astro.config.mjs las URLs para redes sociales salen absolutas
-const pageUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
-const ogImage = Astro.site ? new URL(image, Astro.site).href : image;
+const absolute = (path: string) => (Astro.site ? new URL(path, Astro.site).href : path);
+const pageUrl = absolute(Astro.url.pathname);
+const ogImage = absolute("/og-image.jpg");
+
+// Datos estructurados para que Google entienda quién es la persona detrás del sitio
+const person = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name,
+	jobTitle: label,
+	url: absolute("/"),
+	image: absolute(image),
+	address: { "@type": "PostalAddress", addressLocality: location.city, addressCountry: location.countryCode },
+	worksFor: { "@type": "Organization", name: work[0].name, url: work[0].url },
+	alumniOf: education.map(({ institution }) => ({ "@type": "EducationalOrganization", name: institution })),
+	knowsAbout: skills.map(({ name }) => name),
+	sameAs: profiles.map(({ url }) => url),
+};
 // Cloudflare Web Analytics: solo se carga si se define el token como variable de entorno al compilar
+const FONTS = "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap";
 const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<title>{title}</title>
-		<meta name="description" content={summary} />
+		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content={name} />
+		{noindex && <meta name="robots" content="noindex" />}
+		<meta name="theme-color" content="#f8f2ef" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#16080a" media="(prefers-color-scheme: dark)" />
 		<link rel="icon" type="image/svg+xml" href="/logokevsinfondo.svg" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="sitemap" href="/sitemap.xml" />
 		<link rel="preload" as="image" href={image} />
 
-		{pageUrl && <link rel="canonical" href={pageUrl} />}
-		{pageUrl && <meta property="og:url" content={pageUrl} />}
+		<link rel="canonical" href={pageUrl} />
+		{alternates.map(({ lang, href }) => <link rel="alternate" hreflang={lang} href={absolute(href)} />)}
+
 		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={name} />
+		<meta property="og:locale" content={lang === "en" ? "en_US" : "es_PE"} />
+		<meta property="og:url" content={pageUrl} />
 		<meta property="og:title" content={title} />
-		<meta property="og:description" content={summary} />
+		<meta property="og:description" content={description} />
 		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={`${name}, ${label} en ${location.city}`} />
 
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
-		<meta name="twitter:description" content={summary} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(person)} />
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
+		<!-- Carga la fuente sin bloquear el primer pintado: se aplica cuando termina de descargar -->
+		<link rel="preload" as="style" href={FONTS} />
+		<link rel="stylesheet" href={FONTS} media="print" onload="this.media='all'" />
+		<noscript><link rel="stylesheet" href={FONTS} /></noscript>
 
 		<!-- Aplica el tema antes de pintar para evitar el parpadeo -->
 		<script is:inline>

@@ -1,8 +1,9 @@
 ---
-// Página para ver el CV en pantalla; solo se imprime si el usuario lo pide
+// Página para ver el CV en pantalla; el botón descarga el PDF ya generado (pnpm run cv:pdf)
 import Layout from "@/layouts/Layout.astro";
 import CvPrint from "@/components/CvPrint.astro";
 import { basics } from "@cv";
+import cvEn from "../../cv.en.json";
 
 interface Props {
 	lang: "es" | "en";
@@ -10,18 +11,26 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = {
-	es: { title: "CV", back: "Volver al portafolio", hint: "o pulsa Esc", save: "Guardar en PDF" },
-	en: { title: "Resume", back: "Back to portfolio", hint: "or press Esc", save: "Save as PDF" },
+	es: { title: "CV", back: "Volver al portafolio", hint: "o pulsa Esc", save: "Descargar PDF", pdf: "/kevin-jimenez-cv.pdf" },
+	en: { title: "Resume", back: "Back to portfolio", hint: "or press Esc", save: "Download PDF", pdf: "/kevin-jimenez-resume.pdf" },
 }[lang];
 ---
 
-<Layout title={`${basics.name} | ${t.title}`}>
+<Layout
+	title={`${basics.name} | ${t.title}`}
+	lang={lang}
+	description={lang === "en" ? cvEn.basics.description : basics.description}
+	alternates={[
+		{ lang: "es", href: "/cv/" },
+		{ lang: "en", href: "/cv-en/" },
+	]}
+>
 	<div class="no-print mx-auto flex max-w-[210mm] items-center justify-between gap-4 px-5 py-6">
 		<p class="text-[15px] text-muted">
 			<a href="/" class="transition-colors hover:text-ink">← {t.back}</a>
 			<span class="ml-1 hidden sm:inline">{t.hint}</span>
 		</p>
-		<button type="button" data-print class="btn-primary">{t.save}</button>
+		<a href={t.pdf} download class="btn-primary">{t.save}</a>
 	</div>
 	<div class="sheet mx-auto mb-16 w-fit shadow-2xl shadow-wine/15">
 		<CvPrint lang={lang} onScreen />
@@ -29,7 +38,6 @@ const t = {
 </Layout>
 
 <script>
-	document.querySelector("[data-print]")?.addEventListener("click", () => window.print());
 	document.addEventListener("keydown", (event) => {
 		if (event.key === "Escape") window.location.href = "/";
 	});
